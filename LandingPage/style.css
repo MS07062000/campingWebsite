@@ -1,0 +1,63 @@
+.container {
+    overflow: hidden;
+    margin: 0%;
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.part1{
+    margin: 1% 10.5% 0% 10.5%;
+    height:100vh;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.introduction{
+    font-weight: 900;
+    font-size: 50px;
+    margin: 15% 0% 5% 0%;
+}
+
+.keypoints{
+    display: flex;
+    flex-wrap: nowrap;
+    margin-block-start: 0.7em;
+    margin-block-end: 0.7em;
+}
+
+.checkmark{
+    width:80%;
+}
+
+.viewCampgroundsButton{
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 5% 0%;
+    font-size: 15px;
+    width:40%;
+    margin-top: 1%;
+    border-radius: 5px;
+}
+
+.sponsorsContainer{
+    margin-top: 10%;
+}
+
+.sponsorsList{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    flex-direction: row;
+}
+
+.campImage{
+    width: 50%;
+}
