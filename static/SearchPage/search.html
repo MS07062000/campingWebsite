@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp</title>
+    <link rel="stylesheet" type="text/css" href="../SearchPage/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logoAndHomeButton">
+                <img src="/Assets/Logo.svg">
+                <p class="home">Home</p>
+            </div>
+            <div class="loggedInOrWithoutLoginIn">
+                <p>Login</p>
+                <div class="createAnAccount">Create an account</div>
+            </div>
+        </div>
+        <div class="searchbar">
+            <p class="welcomeMessage">Welcome to YelpCamp!</p>
+            <p>View our hand-picked campgrounds from all over the world, or add your own.</p>
+            <input class="search">
+            <div class="searchButton">Search</div>
+            <p class="addNewCampground">Or add your own campground</p>
+        </div>
+        <div class="campGrounds">
+            <camp-card img="/Assets/Camp Images/High Quality Images/Mount Ulap.png", campName="Mount Ulap", campDescription="One of the most famous hikes in Benguet is Mt Ulap in Itogon."></camp-card>
+            <camp-card img="/Assets/Camp Images/High Quality Images/Calagus Islands.jpg", campName="Calagus Islands", campDescription="A paradise of islands that can rival the white sand beauty of Boracay."></camp-card>
+            <camp-card img="/Assets/Camp Images/High Quality Images/Onay Beach.jpg", campName="Onay Beach", campDescription="This is one of the best beach camping sites, beautiful and pristine."></camp-card>
+            <camp-card img="/Assets/Camp Images/High Quality Images/Seven Sisters Waterfall.jpg", campName="Seven Sisters Waterfall", campDescription="The Seven Sisters is the 39th tallest waterfall in Norway."></camp-card>
+            <camp-card img="/Assets/Camp Images/High Quality Images/Latik Riverside.jpg", campName="Latik Riverside", campDescription="Philippines is one of the most dazzling countries in all of Asia."></camp-card>
+            <camp-card img="/Assets/Camp Images/High Quality Images/Buloy Springs.jpg", campName="Buloy Springs", campDescription="This is one of the best beach camping sites, beautiful and pristine."></camp-card>
+        </div>
+        <div class="footer">
+            <img src="/Assets/Logo.svg">
+        </div>
+    </div>
+</body>
+<script src="../CampCard/campcard.js" type="text/javascript"></script>
+</html>

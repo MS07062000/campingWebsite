@@ -1,0 +1,338 @@
+:root{
+    font-size:100%;
+}
+
+body{
+    margin:0;
+    padding:0;
+}
+
+
+@media only screen and (min-device-width:320px){
+    .container {
+        overflow: hidden;
+        margin: 0%;
+        width:100vw;
+        width: calc(var(--vw, 1vw) * 100);
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        flex-direction: column;
+    }
+    
+    .signupContainer {
+        margin: 5%;
+    }
+    
+    .review {
+        background-color: #F2EFEE;
+        padding-bottom:5%;
+    }
+    
+    .logowithBackButton {
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        margin-top: 5%;       
+    }
+    
+    .logoimg{
+        width:35%
+    }
+
+    .introduction {
+        font-weight: 900;
+        font-size: 2rem;
+        margin: 10% 0%;
+    }
+    
+    .backtocamp {
+        font-size: 1.0rem;
+        color: #555555;
+        font-weight: 500;
+        margin:0%;
+    }
+    
+    .label {
+        color: #555555;;
+        font-size: 1.0rem;
+    }
+    
+    input {
+        width: -webkit-fill-available;
+        display: block;
+        padding: 5%;
+        margin: 4% 0%;
+        background-color: #F5F5F5;
+        border:none;
+        color: #A9A9A9;
+    }
+    
+    .createAccountButton {
+        background-color: black;
+        color: white;
+        text-align: center;
+        padding: 5% 0%;
+        font-size: 1rem;
+        border-radius: 5px;
+        margin: 7% 0% 5% 0%;
+    }
+    
+    .blueButton {
+        color: #4666ff;
+        text-decoration: underline;
+        font-weight: bolder;
+    }
+    
+    ::placeholder {
+        margin-left: 0px;
+    }
+    
+    ::-webkit-input-placeholder {
+        margin-left: 0px;
+    }
+    
+    .commentSection {
+        padding: 5%;
+    }
+    
+    .comment {
+        font-size: 1.32rem;
+        font-weight: bold;
+        line-height: 32px;
+    }
+    
+    .user {
+        display: flex;
+        align-items: center;
+        column-gap: 10px;
+    }
+    
+    .name {
+        font-weight: bold;
+        font-size: 0.95rem;
+    }
+    
+    .designation {
+        font-weight: normal;
+        color: #808080;
+    }
+}
+
+@media only screen and (min-device-width:768px){
+    .container {
+        overflow: hidden;
+        margin: 0%;
+        width:100vw;
+        width: calc(var(--vw, 1vw) * 100);
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        flex-direction: column;
+    }
+    
+    .signupContainer {
+        margin: 5%;
+    }
+    
+    .review {
+        background-color: #F2EFEE;
+    }
+    
+    .logowithBackButton {
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+        justify-content: space-between;       
+    }
+    
+    .logoimg{
+        width:20%;
+    }
+
+    .introduction {
+        font-weight: 900;
+        font-size: 2.5rem;
+        margin: 6% 0%;
+    }
+    
+    .backtocamp {
+        font-size: 1.1rem;
+        color: #555555;
+        font-weight: 500;
+        margin:0%;
+    }
+    
+    .label {
+        color: #555555;;
+        font-size: 1.1rem;
+    }
+    
+    input {
+        width: -webkit-fill-available;
+        display: block;
+        padding: 3%;
+        margin: 2% 21.5% 2% 0%;
+        background-color: #F5F5F5;
+        border:none;
+        color: #A9A9A9;
+        font-size:1rem;
+    }
+    
+    .createAccountButton {
+        background-color: black;
+        color: white;
+        text-align: center;
+        padding: 3% 0%;
+        font-size: 1.1rem;
+        border-radius: 5px;
+        margin: 3% 21.5% 3% 0%;
+    }
+    
+    .blueButton {
+        color: #4666ff;
+        text-decoration: underline;
+        font-weight: bolder;
+    }
+    
+    ::placeholder {
+        margin-left: 0px;
+    }
+    
+    ::-webkit-input-placeholder {
+        margin-left: 0px;
+    }
+    
+    .commentSection {
+        padding: 5%;
+    }
+    
+    .comment {
+        font-size: 1.7rem;
+        font-weight: bold;
+        line-height: 32px;
+    }
+    
+    .user {
+        display: flex;
+        align-items: center;
+        column-gap: 10px;
+    }
+    
+    .name {
+        font-weight: bold;
+        font-size: 1rem;
+    }
+    
+    .designation {
+        font-weight: normal;
+        color: #808080;
+    }
+}
+
+
+@media only screen and (min-device-width:1024px){
+    .container {
+        overflow: hidden;
+        margin: 0%;
+        height: 100vh;
+        height: calc(var(--vh, 1vh) * 100);
+        width:100vw;
+        width: calc(var(--vw, 1vw) * 100);
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        flex-direction: row;
+    }
+    
+    .signupContainer {
+        margin: 1% 10% 0% 10%;
+    }
+    
+    .review {
+        width: 40%;
+        background-color: #F2EFEE;
+    }
+    
+    .logowithBackButton {
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+    }
+    
+    .introduction {
+        font-weight: 900;
+        font-size: 1.875rem;
+        margin: 15% 0% 5% 0%;
+    }
+    
+    .backtocamp {
+        font-size: 1.125rem;
+        color: #555555;
+        font-weight: 500;
+    }
+    
+    .label {
+        color: #555555;;
+        font-size: 1.0625rem;
+    }
+    
+    input {
+        width: -webkit-fill-available;
+        display: block;
+        padding: 2.5% 2%;
+        margin: 2% 0%;
+    }
+    
+    .createAccountButton {
+        background-color: black;
+        color: white;
+        text-align: center;
+        padding: 3% 0%;
+        font-size: 1.25rem;
+        border-radius: 5px;
+    }
+    
+    .blueButton {
+        color: #4666ff;
+        text-decoration: underline;
+        font-weight: bolder;
+    }
+    
+    ::placeholder {
+        margin-left: 0px;
+    }
+    
+    ::-webkit-input-placeholder {
+        margin-left: 0px;
+    }
+    
+    .commentSection {
+        padding: 35% 25%;
+    }
+    
+    .comment {
+        font-size: 1.4375rem;
+        font-weight: bold;
+        line-height: 32px;
+    }
+    
+    .user {
+        display: flex;
+        align-items: center;
+        column-gap: 10px;
+    }
+    
+    .name {
+        font-weight: bold;
+    }
+    
+    .designation {
+        font-weight: normal;
+        color: #808080;
+    }
+        
+}
+
