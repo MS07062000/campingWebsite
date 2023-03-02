@@ -6,6 +6,8 @@ const uri =
 
 // Create a new MongoClient
 const client = new MongoClient(uri);
+export var db;
+
 
 export async function connectToDatabase() {
   try {
@@ -17,6 +19,10 @@ export async function connectToDatabase() {
     // Establish and verify connection
     await client.db("admin").command({ ping: 1 });
     console.log("Connected successfully to server");
+    //user and password collections
+    db=client.db("test");
+    
+
   } finally {
     // Ensures that the client will close when you finish/error
     await client.close();
