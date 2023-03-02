@@ -1,20 +1,19 @@
-function signInSignUp(){
-   let signUpContainer=document.querySelector(".signUpContainer");
-   let flag=0;
-   if(signUpContainer==null){
-      flag=1;
-      signUpContainer=document.createElement("signUp");
-   }
-
-   signUpContainer.querySelector(".createAccountButton").textContent="Login";
-   signUpContainer.querySelector(".blueButton").textContent="Create an account";
-   signUpContainer.querySelectorAll(".label").forEach((element)=>{
-   if(element.textContent=="Already a user? ")
-   {
-    element.textContent="Not a user yet? "
-   }});
-   //change link also of blue button
-   if(flag==1){
-      document.querySelector();
-   }
-}
+document.querySelector('[name="signInForm"]').addEventListener("submit",(e)=>{
+   console.log("signIn");
+   e.preventDefault();
+   let form=document.querySelector('[name="signInForm"]');
+   let username=form.querySelector("[name='username']").value;
+   let password=form.querySelector("[name='password']").value;
+   form.querySelector('button').disabled=true;
+   console.log(username+" "+password);
+   fetch("http://127.0.0.1:3000/SignIn",{
+      method:"POST",
+      body:JSON.stringify({"username":username,"password":password}),
+      headers:{"Content-Type":"application/json"}
+   })
+   .then((result)=>{
+      console.log(result);
+   }).catch((err)=>{
+      console.log(err);
+   });
+});

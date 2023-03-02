@@ -2,7 +2,127 @@
     font-size: 100%;
 }
 
+body {
+    margin: 0;
+    padding: 0;
+}
+
+a{
+    text-decoration: none;
+}
+
+
 @media only screen and (min-device-width: 320px) {
+    .container {
+        margin: 10% 5%;
+    }
+
+    .header{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .home{
+        display: none;
+    }
+
+    .loggedIn{
+        display: none;
+    }
+
+    .createAnAccount {
+        display: none;
+    }
+
+    .hamburgermenu {
+        background-color: #F5F5F5;
+        display: flex;
+        align-items: center;
+        padding: 2px;
+    }
+
+    .addNewCampgroundBody {
+        padding:0;
+    }
+
+    .addNewCampgroundTitle {
+        font-size: 2.1875rem;
+        font-weight: bold;
+    }
+
+    .campFormSubTitle {
+        margin-block-start: 5px;
+        margin-block-end: 5px;
+        color: #505050;
+        font-size: 1.1rem;
+    }
+
+    .campgroundName,
+    .price,
+    .imageLink {
+        width: 98%;
+        height: 42px;
+        margin: 2% 0%;
+        resize: none;
+        background-color: #F5F5F5;
+        border-color: #F5F5F5;
+
+    }
+
+    .campgroundName::placeholder,
+    .campgroundName::-webkit-input-placeholder,
+    .price::placeholder,
+    .price::-webkit-input-placeholder,
+    .imageLink::placeholder,
+    .imageLink::-webkit-input-placeholder {
+        color: #A9A9A9;
+        padding: 10px;
+        font-size: 1.1rem;
+        font-family: 'Times New Roman', Times, serif;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
+
+    .description {
+        width: 98%;
+        height: 220px;
+        margin: 2% 0%;
+        resize: none;
+        background-color: #F5F5F5;
+        border-color: #F5F5F5;
+    }
+
+    .description::placeholder,
+    .description::-webkit-input-placeholder {
+        color: #A9A9A9;
+        padding: 10px;
+        font-size: 1.1rem;
+        font-family: 'Times New Roman', Times, serif;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
+
+    .addCampgroundButton {
+        background-color: black;
+        color: white;
+        font-size: 1.1rem;
+        border-radius: 5px;
+        width: 100%;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .footer {
+        margin: 70px 0px;
+    }
+}
+
+@media only screen and (min-device-width: 768px) {
     .container {
         margin: 10% 3%;
     }
@@ -19,115 +139,7 @@
         display: none;
     }
 
-    .loggedInOrWithoutLoginIn {
-        display: none;
-    }
-
-    .createAnAccount {
-        display: none;
-    }
-
-    .hamburgermenu {
-        background-color: #F5F5F5;
-        display: flex;
-        align-items: center;
-        padding: 2px;
-    }
-
-    .addNewCampgroundBody {
-
-    }
-
-    .addNewCampgroundTitle {
-        font-size: 35px;
-        font-weight: bold;
-    }
-
-    .campFormSubTitle {
-        margin-block-start: 5px;
-        margin-block-end: 5px;
-        color: #505050
-    }
-
-    .campgroundName,
-    .price,
-    .imageLink {
-        width: 100%;
-        height: 42px;
-        margin: 5px 0px;
-        resize: none;
-        background-color: #F5F5F5;
-        border-color: #F5F5F5;
-
-    }
-
-    .campgroundName::placeholder,
-    .campgroundName::-webkit-input-placeholder,
-    .price::placeholder,
-    .price::-webkit-input-placeholder,
-    .imageLink::placeholder,
-    .imageLink::-webkit-input-placeholder {
-        color: #A9A9A9;
-        padding: 10px;
-        font-size: 18px;
-        font-family: 'Times New Roman', Times, serif;
-        white-space: pre-wrap;
-        word-wrap: break-word;
-    }
-
-    .description {
-        width: 100%;
-        height: 200px;
-        margin: 10px 0px;
-        resize: none;
-        background-color: #F5F5F5;
-        border-color: #F5F5F5;
-    }
-
-    .description::placeholder,
-    .description::-webkit-input-placeholder {
-        color: #A9A9A9;
-        padding: 10px;
-        font-size: 18px;
-        font-family: 'Times New Roman', Times, serif;
-        white-space: pre-wrap;
-        word-wrap: break-word;
-    }
-
-    .addCampgroundButton {
-        background-color: black;
-        color: white;
-        text-align: center;
-        padding: 10px 0px;
-        font-size: 1.25rem;
-        border-radius: 5px;
-        width: 100%;
-        height: 25px;
-    }
-
-    .footer {
-        margin: 70px 0px;
-    }
-}
-
-@media only screen and (min-device-width: 768px) {
-    .container {
-        margin: 5% 3%;
-    }
-
-    .header{
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: nowrap;
-        flex-direction: row;
-        align-items: center;
-    }
-
-    .home{
-        display: none;
-    }
-
-    .loggedInOrWithoutLoginIn {
+    .loggedIn {
         display: none;
     }
 
@@ -154,15 +166,16 @@
     .campFormSubTitle {
         margin-block-start: 10px;
         margin-block-end: 10px;
-        color: #505050
+        color: #505050;
+        font-size: 1.25rem;
     }
 
     .campgroundName,
     .price,
     .imageLink {
         width: 100%;
-        height: 42px;
-        margin: 5px 0px;
+        height: 13vh;
+        margin: 2% 0%;
         resize: none;
         background-color: #F5F5F5;
         border-color: #F5F5F5;
@@ -185,8 +198,8 @@
 
     .description {
         width: 100%;
-        height: 42px;
-        margin: 10px 0px;
+        height: 45vh;
+        margin: 2% 0%;
         resize: none;
         background-color: #F5F5F5;
         border-color: #F5F5F5;
@@ -196,7 +209,7 @@
     .description::-webkit-input-placeholder {
         color: #A9A9A9;
         padding: 10px;
-        font-size: 18px;
+        font-size: 1.125rem;
         font-family: 'Times New Roman', Times, serif;
         white-space: pre-wrap;
         word-wrap: break-word;
@@ -205,22 +218,25 @@
     .addCampgroundButton {
         background-color: black;
         color: white;
-        text-align: center;
-        padding: 10px 0px;
-        font-size: 20px;
+        font-size: 1.15rem;
         border-radius: 5px;
-        width: 510px;
-        height: 25px;
+        width: 101%;
+        height: 15vh;
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+        margin-top: 2%;
     }
 
     .footer {
-        margin: 70px 0px;
+        margin: 10% 0%;
     }
 }
 
 @media only screen and (min-device-width: 1024px) {
     .container{
-        margin: 50px 100px;
+        margin: 5% 10%;
     }
     
     .header{
@@ -229,9 +245,25 @@
         flex-wrap: nowrap;
         flex-direction: row;
         align-items: center;
+        font-size: 1.3rem;
     }
-    
-    .loggedInOrWithoutLoginIn {
+
+    .logoAndHomeButton {
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 15%;
+    }
+
+    .home{
+        display: inline;
+        color: #505050;
+    }
+
+    .loggedIn {
+        width: 12%;
         display: flex;
         align-items: center;
         flex-wrap: nowrap;
@@ -239,13 +271,13 @@
         justify-content: space-between;
     }
 
-    .createAnAccount {
-        margin-left: 10px;
-        background-color: black;
-        color: white;
-        padding: 20px;
-        border-radius: 5px;
-        display:block;
+    .userName{
+        color:#505050;
+        font-weight: bolder;
+    }
+
+    .logout {
+        color: #505050;
     }
 
     .hamburgermenu {
@@ -253,28 +285,27 @@
     }
 
     .addNewCampgroundBody {
-        padding: 100px 350px;
-
-        margin:0px;
+        margin:10% 26%;
     }
 
     .addNewCampgroundTitle {
-        font-size: 2.1875rem;
+        font-size: 3rem;
         font-weight: bold;
     }
 
     .campFormSubTitle {
-        margin-block-start: 5px;
-        margin-block-end: 5px;
-        color: #505050
+        margin-block-start: 1%;
+        margin-block-end: 1%;
+        color: #505050;
+        font-size: 1.5rem;
     }
 
     .campgroundName,
     .price,
     .imageLink {
-        width: 500px;
-        height: 42px;
-        margin: 5px 0px;
+        width: 100%;
+        height: 50px;
+        margin: 2% 0%;
         resize: none;
         background-color: #F5F5F5;
         border-color: #F5F5F5;
@@ -289,16 +320,16 @@
     .imageLink::-webkit-input-placeholder {
         color: #A9A9A9;
         padding: 10px;
-        font-size: 18px;
+        font-size: 1.5rem;
         font-family: 'Times New Roman', Times, serif;
         white-space: pre-wrap;
         word-wrap: break-word;
     }
 
     .description {
-        width: 500px;
+        width: 100%;
         height: 200px;
-        margin: 10px 0px;
+        margin: 2% 0%;
         resize: none;
         background-color: #F5F5F5;
         border-color: #F5F5F5;
@@ -308,20 +339,22 @@
     .description::-webkit-input-placeholder {
         color: #A9A9A9;
         padding: 10px;
-        font-size: 18px;
+        font-size: 1.5rem;
         font-family: 'Times New Roman', Times, serif;
         white-space: pre-wrap;
         word-wrap: break-word;
     }
 
     .addCampgroundButton {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         background-color: black;
         color: white;
-        text-align: center;
-        padding: 10px 0px;
-        font-size: 20px;
+        font-size: 1.5rem;
         border-radius: 5px;
-        width: 510px;
-        height: 25px;
+        width: 101%;
+        height: 50px;
+        margin: 2% 0%;
     }
 }

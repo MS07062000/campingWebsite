@@ -1,0 +1,459 @@
+:root {
+    font-size: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+a{
+    text-decoration: none;
+}
+
+@media only screen and (min-device-width:320px) {
+    .container {
+        margin: 2%;
+        font-size: 18px;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .logoAndHomeButton {
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+        flex-direction: row;
+    }
+
+    .home {
+        margin-left: 20px;
+    }
+
+    .loggedInOrWithoutLoginIn {
+        display: none;
+    }
+
+    .createAnAccount {
+        display: none;
+    }
+
+    .mainBody {
+        display: flex;
+        flex-direction: column-reverse;
+        flex-wrap: nowrap;
+        align-items: stretch;
+        justify-content: space-between;
+    }
+
+    .mapImage {
+        flex: 4;
+        border-style: solid;
+        padding: 50px;
+        margin-right: 5%;
+    }
+
+    .map {
+        border: solid black;
+        padding: 50px;
+    }
+
+    .campDescriptionAndComment {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: stretch;
+        margin-bottom: 5%;
+    }
+
+    .campImageWithDescription {
+        border-style: solid;
+        padding: 50px;
+        margin-bottom: 5%;
+    }
+
+    .campImage {
+        width: 100%;
+        height: 100%;
+    }
+
+    .campName {
+        font-weight: bold;
+        font-size: 1.6rem;
+    }
+
+    .price {
+        float: right;
+        font-size: 1.2rem;
+        padding: 5px 0px;
+    }
+
+    .campgroundInformation {
+        margin: 3% 0%;
+        color: gray;
+        font-size: 1.25rem;
+    }
+
+    .campgroundDefinedByUser {
+        font-style: italic;
+        font-size: 1.25rem;
+    }
+
+
+    .campComments {
+        border-style: solid;
+        padding: 50px;
+    }
+
+    .commentZone {
+        overflow-y: scroll;
+        height: 40vh;
+    }
+
+    .commentZone::-webkit-scrollbar {
+        display: none;
+    }
+
+    .userNameandComment {
+        margin: 0% 0% 3% 0%;
+        border-bottom: solid black;
+    }
+
+    .userName {
+        font-weight: bold;
+        font-size: 1.25rem;
+    }
+
+    .time {
+        float: right;
+        font-weight: normal;
+        color: gray;
+    }
+
+    .userCommentForCampground {
+        font-size: 1.25rem;
+        color: gray;
+    }
+
+    .leaveAReviewButton {
+        background-color: black;
+        display: flex;
+        float: right;
+        align-items: center;
+        color: white;
+        padding: 5px 20px;
+        border-radius: 5%;
+    }
+
+    /* .footer {
+        margin: 5% 0%;
+    } */
+}
+
+@media only screen and (min-device-width:768px) {
+    .container {
+        margin: 2%;
+        font-size: 18px;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .logoAndHomeButton {
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+        flex-direction: row;
+    }
+
+    .home {
+        margin-left: 20px;
+    }
+
+    .loggedInOrWithoutLoginIn {
+        display: none;
+    }
+
+    .createAnAccount {
+        display: none;
+    }
+
+    .mainBody {
+        display: flex;
+        flex-direction: column-reverse;
+        flex-wrap: nowrap;
+        align-items: stretch;
+        justify-content: space-between;
+    }
+
+    .mapImage {
+        flex: 4;
+        border-style: solid;
+        padding: 50px;
+        margin-right: 5%;
+    }
+
+    .map {
+        flex: 4;
+        border: solid black;
+        padding: 50px;
+    }
+
+    .campDescriptionAndComment {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: stretch;
+        margin-bottom: 5%;
+    }
+
+    .campImageWithDescription {
+        border-style: solid;
+        padding: 50px;
+        margin-bottom: 5%;
+    }
+
+    .campImage {
+        width: 100%;
+        height: 100%;
+    }
+
+    .campName {
+        font-weight: bold;
+        font-size: 1.6rem;
+    }
+
+    .price {
+        float: right;
+        font-size: 1.2rem;
+        padding: 5px 0px;
+    }
+
+    .campgroundInformation {
+        margin: 3% 0%;
+        color: gray;
+        font-size: 1.25rem;
+    }
+
+    .campgroundDefinedByUser {
+        font-style: italic;
+        font-size: 1.25rem;
+    }
+
+
+    .campComments {
+        border-style: solid;
+        padding: 50px;
+    }
+
+    .commentZone {
+        overflow-y: scroll;
+        height: 40vh;
+    }
+
+    .commentZone::-webkit-scrollbar {
+        display: none;
+    }
+
+    .userNameandComment {
+        margin: 0% 0% 3% 0%;
+        border-bottom: solid black;
+    }
+
+    .userName {
+        font-weight: bold;
+        font-size: 1.25rem;
+    }
+
+    .time {
+        float: right;
+        font-weight: normal;
+        color: gray;
+    }
+
+    .userCommentForCampground {
+        font-size: 1.25rem;
+        color: gray;
+    }
+
+    .leaveAReviewButton {
+        background-color: black;
+        display: flex;
+        float: right;
+        align-items: center;
+        color: white;
+        padding: 5px 20px;
+        border-radius: 5%;
+    }
+
+    /* .footer {
+        margin: 5% 0%;
+    } */
+}
+
+@media only screen and (min-device-width:1024px) {
+    .container {
+        margin: 50px 100px;
+        font-size: 18px;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        align-items: center;
+    }
+
+
+    .logoAndHomeButton {
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        width: 15%;
+    }
+
+    .home {
+        margin-left: 20px;
+    }
+
+    .loggedInOrWithoutLoginIn {
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .createAnAccount {
+        margin-left: 10px;
+        background-color: black;
+        color: white;
+        padding: 20px;
+        border-radius: 5px;
+    }
+
+    .mainBody {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+
+    .mapImage {
+        flex: 4;
+        border-style: solid;
+        padding: 50px;
+        margin-right: 5%;
+    }
+
+    .map {
+        width: 100%;
+        height: 100%;
+    }
+
+    .campDescriptionAndComment {
+        flex: 12;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: stretch;
+    }
+
+    .campImageWithDescription {
+        border-style: solid;
+        padding: 50px;
+        margin-bottom: 5%;
+    }
+
+    .campImage {
+        width: 100%;
+        height: 100%;
+    }
+
+    .campName {
+        font-weight: bold;
+        font-size: 1.6rem;
+    }
+
+    .price {
+        float: right;
+        font-size: 1.2rem;
+        padding: 5px 0px;
+    }
+
+    .campgroundInformation {
+        margin: 3% 0%;
+        color: gray;
+        font-size: 1.25rem;
+    }
+
+    .campgroundDefinedByUser {
+        font-style: italic;
+        font-size: 1.25rem;
+    }
+
+
+    .campComments {
+        border-style: solid;
+        padding: 50px;
+    }
+
+    .commentZone {
+        overflow-y: scroll;
+        height: 40vh;
+    }
+
+    .commentZone::-webkit-scrollbar {
+        display: none;
+    }
+
+    .userNameandComment {
+        margin: 0% 0% 3% 0%;
+        border-bottom: solid black;
+    }
+
+    .userName {
+        font-weight: bold;
+        font-size: 1.25rem;
+    }
+
+    .time {
+        float: right;
+        font-weight: normal;
+        color: gray;
+    }
+
+    .userCommentForCampground {
+        font-size: 1.25rem;
+        color: gray;
+    }
+
+    .leaveAReviewButton {
+        background-color: black;
+        display: flex;
+        float: right;
+        align-items: center;
+        color: white;
+        padding: 5px 20px;
+        border-radius: 5%;
+    }
+
+    /* .footer {
+        margin-top: 5%;
+        margin-bottom: 5%;
+    } */
+}

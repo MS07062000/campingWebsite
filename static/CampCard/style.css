@@ -1,11 +1,19 @@
+:root {
+    font-size: 100%;
+}
+
+a{
+    text-decoration: none;
+}
+
 .campContainer{
     border-style: solid;
     border-radius: 5px;
     border-color: white;
     box-shadow: rgb(50 50 93 / 25%) 0px 0px 5px 0px;
-    padding: 5px;
+    padding: 10px;
     width: 340px;
-    margin: 10px 0px;
+    margin:0% 8% 8% 0%;
 }
 .campImage{
     width: 338px;
