@@ -1,50 +1,61 @@
 import { connectToDatabase } from '../server/mongodb.mjs';
+import { MongoClient } from 'mongodb';
 import { db } from '../server/mongodb.mjs';
-import { checkPassword, setPassword } from './auth.js';
+import { checkPassword, setPassword } from './auth.mjs';
 
-export async function connect(){
+export async function connect() {
   await connectToDatabase();
 }
 
 
 export async function createCollection() {
-  await db.createCollection("auth", (err, result) => {
-    if (err) {
-      console.log("Successfully Created auth Collection or already exists");
-    }
+  var collectionList = await db.listCollections().toArray();
+  collectionList = collectionList.map(collection => collection.name);
+  console.log(collectionList);
+  if (collectionList.indexOf("auth") == -1) {
+    await db.createCollection("auth", (err, result) => {
+      if (err) {
+        console.log("Successfully Created auth Collection or already exists");
+      }
 
-    if (result) {
-      console.log("Successfully Created auth Collection or it already exists");
-    }
-  });
-
-  await db.createCollection("comments", (err, result) => {
-    if (err) {
-      console.log("Error in creating comments Collection is:" + err);
-    }
-
-    if (result) {
-      console.log("Successfully Created comments Collection or it already exists");
-    }
-  });
-
-  await db.createCollection("campgrounds", (err, result) => {
-    if (err) {
-      console.log("Error in creating campgrounds Collection is:" + err);
-    }
-
-    if (result) {
-      console.log("Successfully Created campgrounds Collection or it already exists");
-    }
-  });
+      if (result) {
+        console.log("Successfully Created auth Collection or it already exists");
+      }
+    });
+  }
 
 
+  if (collectionList.indexOf("comments") == -1) {
+    await db.createCollection("comments", (err, result) => {
+      if (err) {
+        console.log("Error in creating comments Collection is:" + err);
+      }
+
+      if (result) {
+        console.log("Successfully Created comments Collection or it already exists");
+      }
+    });
+  }
+
+
+  if (collectionList.indexOf("campgrounds") == -1) {
+    await db.createCollection("campgrounds", (err, result) => {
+      if (err) {
+        console.log("Error in creating campgrounds Collection is:" + err);
+      }
+
+      if (result) {
+        console.log("Successfully Created campgrounds Collection or it already exists");
+      }
+    });
+  }
 }
 
 export async function authentication(signUpOrsignIn, userInfo) {
-  let userNameExistsOrNot = await db.collection.findOne({ 'userName': userInfo.userName }, (err, result) => {
+  console.log(userInfo);
+  let userNameExistsOrNot = await db.collection('auth').findOne({ 'userName': userInfo.userName }, (err, result) => {
     if (err) {
-      
+      console.log("Error in Finding UserName");
     }
 
     if (result) {
@@ -61,19 +72,20 @@ export async function authentication(signUpOrsignIn, userInfo) {
       //inserting new user
       await db.collection('auth').insertOne(doc, (err, result) => {
         if (err) {
-          console.log("error in signUp");
+          console.log(err);
         }
 
         if (result) {
           console.log("successfully signUp");
         }
       });
-    } 
+    }
 
 
   } else {
     if (userNameExistsOrNot == null) {
       //userName doesn't exists
+      console.log("Invalid UserName and Password");
     } else {
       let result = await checkPassword(userInfo.password, userNameExistsOrNot.hash);
       if (result) {
@@ -88,62 +100,67 @@ export async function authentication(signUpOrsignIn, userInfo) {
 }
 
 
-async function  addComment(commentDetails) {
+export async function addComment(commentDetails) {
   await db.collection("comments").insertOne(commentDetails, (err, result) => {
     if (err) {
-
+      console.log("Error in adding new Comment");
+      console.log(err);
     }
 
     if (result) {
-
+      console.log("Added Comments Successfully");
     }
   });
 }
 
-async function addCampground(campGroundDetails) {
- await  db.collection("newCampground").insertOne(campGroundDetails, (err, result) => {
+export async function addCampground(campGroundDetails) {
+  await db.collection("campgrounds").insertOne(campGroundDetails, (err, result) => {
     if (err) {
-
+      console.log("Error in adding new Campground");
+      console.log(err);
     }
 
     if (result) {
-
+      console.log("Added newCampground Successfully");
     }
   });
 }
 
-async function getCampgroundInfo(campgroundName) {
- await  db.collection("campgrounds").findOne({ 'name': campgroundName }, (err, result) => {
+export async function getCampgroundInfo(campgroundName) {
+  await db.collection("campgrounds").findOne({ 'name': campgroundName }, (err, result) => {
     if (err) {
-
+      console.log("Error in getting all info for " + campgroundName);
+      console.log(err);
     }
 
     if (result) {
-
+      return result;
     }
   });
 }
 
-async function getCommentForCampground(campgroundName) {
- await  db.collection("comments").findOne(campgroundName, (err, result) => {
+export async function getCommentForCampground(campgroundName) {
+  await db.collection("comments").findOne(campgroundName, (err, result) => {
     if (err) {
-
+      console.log("Error in getting all comments for " + campgroundName + " Campground");
+      console.log(err);
     }
 
     if (result) {
-
+      return result;
     }
   });
 }
 
-async function getAllCampground() {
- await  db.collection("campgrounds").find({}).toArray((err, result) => {
+export async function getAllCampground() {
+  await db.collection("campgrounds").find({}).toArray((err, result) => {
     if (err) {
-
+      console.log("Error in getting all Campgrounds");
+      console.log(err);
     }
 
     if (result) {
-
+      return result;
     }
   });
 }

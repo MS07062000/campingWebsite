@@ -16,7 +16,7 @@ document.querySelector('[name="signUpForm"]').addEventListener("submit",(e)=>{
         let password=form.querySelector("[name='password']").value;
         form.querySelector('button').disabled=true;
         console.log(username+" "+password);
-        fetch("http://127.0.0.1:3000/SignIn",{
+        fetch("http://127.0.0.1:3000/api/signUp",{
            method:"POST",
            body:JSON.stringify({"username":username,"password":password}),
            headers:{"Content-Type":"application/json"}
