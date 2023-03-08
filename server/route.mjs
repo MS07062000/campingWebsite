@@ -7,7 +7,8 @@
 // const { authentication, connect, createCollection } = require('./main.mjs');
 import express from 'express';
 import bodyParser from 'body-parser';
-import { addCampground, addComment, authentication, connect, createCollection, getAllCampground } from './main.mjs';
+import { addCampground, addComment, signUp, signIn, connect, createCollection, getAllCampground } from './main.mjs';
+import { validatingToken } from './auth.mjs';
 const app = express();
 const port = 3000;
 app.use(bodyParser.json());
@@ -17,29 +18,36 @@ app.use('/Assets',express.static('Assets'));
 await connect();
 await createCollection();
 
+const authenticate=(response)=>{
+    validatingToken(req.cookies.access_token,response);
+};
 
-app.post('/api/signIn',(req,res)=>{
+app.post('/api/signIn',async(req,res)=>{
     console.log(req.body);
-    res.statusCode(200);
-    authentication(0,req.body);
+    let token=await signUp(req.body,res);
+    res.cookie("access-token",token,{
+        httpOnly:false,
+    }).sendStatus(200);
 });
 
-app.post('/api/signUp',(req,res)=>{
+app.post('/api/signUp',async(req,res)=>{
     console.log(req.body);
-    res.statusCode(200);
-    authentication(1,req.body);
+    let token=await signUp(req.body,res);
+    res.cookie("access-token",token,{
+        httpOnly:false,
+    }).sendStatus(200);
 });
 
 app.post('/api/addComment',(req,res)=>{
     console.log(req.body);
-    res.statusCode(200);
     addComment(req.body);
+    res.sendStatus(200);
 });
 
 app.post('/api/addCampground',(req,res)=>{
     console.log(req.body);
-    res.statusCode(200);
     addCampground(req.body);
+    res.sendStatus(200);
 });
 
 

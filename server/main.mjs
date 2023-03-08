@@ -1,7 +1,7 @@
 import { connectToDatabase } from '../server/mongodb.mjs';
 import { MongoClient } from 'mongodb';
 import { db } from '../server/mongodb.mjs';
-import { checkPassword, setPassword } from './auth.mjs';
+import { checkPassword, setPassword, tokenGeneration } from './auth.mjs';
 
 export async function connect() {
   await connectToDatabase();
@@ -13,15 +13,17 @@ export async function createCollection() {
   collectionList = collectionList.map(collection => collection.name);
   console.log(collectionList);
   if (collectionList.indexOf("auth") == -1) {
-    await db.createCollection("auth", (err, result) => {
-      if (err) {
-        console.log("Successfully Created auth Collection or already exists");
-      }
-
-      if (result) {
-        console.log("Successfully Created auth Collection or it already exists");
-      }
-    });
+    try {
+      var result=await db.createCollection("auth", (err, result) => {
+        if (err) {
+          console.log("Error in Created auth Collection or already exists");
+          throw new Error(err)
+        }
+      });
+      console.log(result);
+    } catch (err) {
+      
+    }
   }
 
 
@@ -53,52 +55,59 @@ export async function createCollection() {
 
 export async function authentication(signUpOrsignIn, userInfo) {
   console.log(userInfo);
-  let userNameExistsOrNot = await db.collection('auth').findOne({ 'userName': userInfo.userName }, (err, result) => {
-    if (err) {
-      console.log("Error in Finding UserName");
-    }
-
-    if (result) {
-      //userName already exists
-      return result;
-    }
-  });
 
 
-  if (signUpOrsignIn) {
-    if (userNameExistsOrNot == null) {//checkinguserExistsORNot
-      let password = await setPassword(userInfo.password);
-      let doc = { 'userName': userInfo.userName, 'password': password };
-      //inserting new user
-      await db.collection('auth').insertOne(doc, (err, result) => {
-        if (err) {
-          console.log(err);
-        }
+}
 
-        if (result) {
-          console.log("successfully signUp");
-        }
-      });
-    }
+async function getUserNameIfExists(userName) {
+  var result = await db.collection('auth').findOne({ 'userName': userName });
+  return result;
+}
 
-
-  } else {
-    if (userNameExistsOrNot == null) {
-      //userName doesn't exists
-      console.log("Invalid UserName and Password");
-    } else {
-      let result = await checkPassword(userInfo.password, userNameExistsOrNot.hash);
-      if (result) {
-        //redirect to home page
-        console.log("Successfully SignIn");
-      } else {
-        //password wrong
-        console.log("Invalid UserName and Password");
+export async function signUp(userInfo, response) {
+  if (getUserNameIfExists(userInfo.userName) == null) {//checkinguserExistsORNot
+    let password = await setPassword(userInfo.password);
+    let doc = { 'userName': userInfo.userName, 'password': password };
+    //inserting new user
+    await db.collection('auth').insertOne(doc, (err, result) => {
+      if (err) {
+        console.log(err);
       }
-    }
+
+      if (result) {
+        console.log("successfully signUp");
+        return tokenGeneration(userInfo);
+      }
+    });
+  } else {
+    console.log("Error in checking username");
   }
 }
 
+
+async function getHashIfExists(userName) {
+  var result = await db.collection('auth').findOne({ 'userName': userName });
+  return result;
+}
+
+
+export async function signIn(userInfo) {
+  var hash = getHashIfExists(userInfo.userName).hash;
+  if (hash == null) {
+    //userName doesn't exists
+    console.log("Invalid UserName and Password");
+  } else {
+    let result = await checkPassword(userInfo.password, hash);
+    if (result) {
+      //redirect to home page
+      console.log("Successfully SignIn");
+      return tokenGeneration(userInfo);
+    } else {
+      //password wrong
+      console.log("Invalid UserName and Password");
+    }
+  }
+}
 
 export async function addComment(commentDetails) {
   await db.collection("comments").insertOne(commentDetails, (err, result) => {

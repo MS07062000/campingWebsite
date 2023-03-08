@@ -20,7 +20,6 @@ export async function connectToDatabase() {
     console.log("Connected successfully to server");
     //user and password collections
     db=client.db("test");
-    console.log(client.db("test").find);
 
   } finally {
     // Ensures that the client will close when you finish/error
