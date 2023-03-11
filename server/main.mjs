@@ -12,73 +12,47 @@ export async function createCollection() {
   var collectionList = await db.listCollections().toArray();
   collectionList = collectionList.map(collection => collection.name);
   console.log(collectionList);
-  if (collectionList.indexOf("auth") == -1) {
-    try {
-      var result=await db.createCollection("auth", (err, result) => {
-        if (err) {
-          console.log("Error in Created auth Collection or already exists");
-          throw new Error(err)
-        }
-      });
-      console.log(result);
-    } catch (err) {
-      
-    }
+  if (collectionList.indexOf("userCredentials") == -1) {
+    await db.createCollection("userCredentials");
   }
 
+  if (collectionList.indexOf("user") == -1) {
+    await db.createCollection("user");
+  }
+
+  if (collectionList.indexOf("session") == -1) {
+    await db.createCollection("session");
+  }
 
   if (collectionList.indexOf("comments") == -1) {
-    await db.createCollection("comments", (err, result) => {
-      if (err) {
-        console.log("Error in creating comments Collection is:" + err);
-      }
-
-      if (result) {
-        console.log("Successfully Created comments Collection or it already exists");
-      }
-    });
+    await db.createCollection("comments");
   }
-
 
   if (collectionList.indexOf("campgrounds") == -1) {
-    await db.createCollection("campgrounds", (err, result) => {
-      if (err) {
-        console.log("Error in creating campgrounds Collection is:" + err);
-      }
-
-      if (result) {
-        console.log("Successfully Created campgrounds Collection or it already exists");
-      }
-    });
+    await db.createCollection("campgrounds");
   }
-}
-
-export async function authentication(signUpOrsignIn, userInfo) {
-  console.log(userInfo);
-
-
 }
 
 async function getUserNameIfExists(userName) {
-  var result = await db.collection('auth').findOne({ 'userName': userName });
+  var result = await db.collection('userCredentials').findOne({ 'userName': userName });
+  console.log("Result" + JSON.stringify(result));
   return result;
 }
 
 export async function signUp(userInfo, response) {
-  if (getUserNameIfExists(userInfo.userName) == null) {//checkinguserExistsORNot
+  if (await getUserNameIfExists(userInfo.userName) == null) {//checkinguserExistsORNot
     let password = await setPassword(userInfo.password);
-    let doc = { 'userName': userInfo.userName, 'password': password };
-    //inserting new user
-    await db.collection('auth').insertOne(doc, (err, result) => {
-      if (err) {
-        console.log(err);
-      }
+    // console.log(password);
 
-      if (result) {
-        console.log("successfully signUp");
-        return tokenGeneration(userInfo);
-      }
-    });
+    let userId = (await db.collection('user').insertOne({})).insertedId;
+    console.log(JSON.stringify(userId));
+
+    let doc = { 'userName': userInfo.userName, 'password': password, 'userId': userId };
+
+    //inserting new user
+    await db.collection('userCredentials').insertOne(doc);
+
+    return signIn(userInfo, response);
   } else {
     console.log("Error in checking username");
   }
@@ -86,13 +60,14 @@ export async function signUp(userInfo, response) {
 
 
 async function getHashIfExists(userName) {
-  var result = await db.collection('auth').findOne({ 'userName': userName });
+  var result = await db.collection('userCredentials').findOne({ 'userName': userName });
+  console.log("Result" + JSON.stringify(result));
   return result;
 }
 
 
-export async function signIn(userInfo) {
-  var hash = getHashIfExists(userInfo.userName).hash;
+export async function signIn(userInfo, response) {
+  var hash = (await getHashIfExists(userInfo.userName)).password;
   if (hash == null) {
     //userName doesn't exists
     console.log("Invalid UserName and Password");
@@ -101,7 +76,7 @@ export async function signIn(userInfo) {
     if (result) {
       //redirect to home page
       console.log("Successfully SignIn");
-      return tokenGeneration(userInfo);
+      return storeSessionToken(userInfo, response);
     } else {
       //password wrong
       console.log("Invalid UserName and Password");
@@ -109,67 +84,44 @@ export async function signIn(userInfo) {
   }
 }
 
-export async function addComment(commentDetails) {
-  await db.collection("comments").insertOne(commentDetails, (err, result) => {
-    if (err) {
-      console.log("Error in adding new Comment");
-      console.log(err);
-    }
 
-    if (result) {
-      console.log("Added Comments Successfully");
-    }
-  });
+async function storeSessionToken(userInfo, response) {
+  let result = (await db.collection("userCredentials").find({ "userName": userInfo.userName }).toArray())[0];
+  console.log(result);
+  let sessionId = (await db.collection("session").insertOne({ "userId": result.userId })).insertedId;
+  console.log(sessionId);
+  let token = await tokenGeneration({}, sessionId.toString());
+  await db.collection("session").updateOne({"_id":sessionId},{$set:{"token":token}});
+  console.log(JSON.stringify(token));
+  response.cookie("access-token", token, {
+    httpOnly: false,
+  }).sendStatus(200);
+  console.log("Successfully added token in session");
+}
+
+
+
+export async function addComment(commentDetails) {
+  await db.collection("comments").insertOne(commentDetails);
 }
 
 export async function addCampground(campGroundDetails) {
-  await db.collection("campgrounds").insertOne(campGroundDetails, (err, result) => {
-    if (err) {
-      console.log("Error in adding new Campground");
-      console.log(err);
-    }
-
-    if (result) {
-      console.log("Added newCampground Successfully");
-    }
-  });
+  await db.collection("campgrounds").insertOne(campGroundDetails);
 }
 
 export async function getCampgroundInfo(campgroundName) {
-  await db.collection("campgrounds").findOne({ 'name': campgroundName }, (err, result) => {
-    if (err) {
-      console.log("Error in getting all info for " + campgroundName);
-      console.log(err);
-    }
-
-    if (result) {
-      return result;
-    }
-  });
+  await db.collection("campgrounds").findOne({ 'name': campgroundName });
 }
 
 export async function getCommentForCampground(campgroundName) {
-  await db.collection("comments").findOne(campgroundName, (err, result) => {
-    if (err) {
-      console.log("Error in getting all comments for " + campgroundName + " Campground");
-      console.log(err);
-    }
-
-    if (result) {
-      return result;
-    }
-  });
+  await db.collection("comments").findOne(campgroundName);
 }
 
 export async function getAllCampground() {
-  await db.collection("campgrounds").find({}).toArray((err, result) => {
-    if (err) {
-      console.log("Error in getting all Campgrounds");
-      console.log(err);
-    }
+  await db.collection("campgrounds").find({}).toArray();
+}
 
-    if (result) {
-      return result;
-    }
-  });
+export async function add(){
+
+  await db.collection("campgrounds").insertOne();
 }

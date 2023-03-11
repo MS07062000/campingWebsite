@@ -27,11 +27,43 @@
 // }
 
 // window.customElements.define("new-campGround",NewCampground);
+let imageOptions = document.body.querySelector('[name=imageOptions]');
+imageOptions.addEventListener('change', (event) => {
+    if (document.body.querySelector(".imageLink") != null) {
+        document.body.querySelectorAll(".imageLink").forEach((element) => { element.remove(); });
+    }
+    let imageInput = document.createElement("input");
+    let property;
+    if (event.target.value == "uploadImage") {
+        property = {
+            class: "imageLink",
+            type: "file",
+            accept: "image/*",
+            placeholder: "Choose Image to upload"
+        }
 
-document.body.querySelector('.addCampgroundButton').addEventListener(()=>{
+    }
 
+    if (event.target.value == "uploadURL") {
+        property = {
+            class: "imageLink",
+            type: "url",
+            placeholder: "www.thepinoytraveler.com/2018/01/mt-ulap-diy-dayhike.html"
+        };
+        imageOptions.after(imageInput);
+    }
+
+    Object.keys(property).forEach((key) => {
+        imageInput.setAttribute(key, property[key]);
+    });
+
+    imageOptions.after(imageInput);
 });
 
-document.body.querySelector('.hamburger').addEventListener(()=>{
+// document.body.querySelector('.addCampgroundButton').addEventListener('click',(event) => {
 
-});
+// });
+
+// document.body.querySelector('.hamburger').addEventListener('click',(event) => {
+
+// });

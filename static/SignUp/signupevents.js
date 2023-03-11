@@ -7,13 +7,13 @@ document.querySelector('[name="signUpForm"]').addEventListener("submit", (e) => 
    //stop spinner
    //enable button not rquired for multipage
    let form = document.querySelector('[name="signUpForm"]');
-   let username = form.querySelector("[name='username']").value;
+   let userName = form.querySelector("[name='username']").value;
    let password = form.querySelector("[name='password']").value;
    form.querySelector('button').disabled = true;
-   console.log(username + " " + password);
+   console.log(userName + " " + password);
    fetch("http://127.0.0.1:3000/api/signUp", {
       method: "POST",
-      body: JSON.stringify({ "username": username, "password": password }),
+      body: JSON.stringify({ "userName": userName, "password": password }),
       headers: { "Content-Type": "application/json" }
    })
       .then((result) => {

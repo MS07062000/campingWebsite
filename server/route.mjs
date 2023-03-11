@@ -23,19 +23,15 @@ const authenticate=(response)=>{
 };
 
 app.post('/api/signIn',async(req,res)=>{
+    console.log("Body:"+JSON.stringify(req.body));
     console.log(req.body);
-    let token=await signUp(req.body,res);
-    res.cookie("access-token",token,{
-        httpOnly:false,
-    }).sendStatus(200);
+    await signIn(req.body,res);
+  
 });
 
 app.post('/api/signUp',async(req,res)=>{
-    console.log(req.body);
-    let token=await signUp(req.body,res);
-    res.cookie("access-token",token,{
-        httpOnly:false,
-    }).sendStatus(200);
+    console.log("Body:"+JSON.stringify(req.body));
+    await signUp(req.body,res);
 });
 
 app.post('/api/addComment',(req,res)=>{
