@@ -11,7 +11,7 @@ import { addCampground, addComment, signUp, signIn, connect, createCollection, g
 import { validatingToken } from './auth.mjs';
 const app = express();
 const port = 3000;
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '5mb'}));
 app.use('/static', express.static('static'));
 app.use('/Assets',express.static('Assets'));
 
@@ -46,6 +46,16 @@ app.post('/api/addCampground',(req,res)=>{
     res.sendStatus(200);
 });
 
+
+app.post('/api/Image',(req,res)=>{
+    console.log(req.body);
+    res.sendStatus(200);
+});
+
+app.get('/api/allCampgrounds',async(req,res)=>{
+    let campgrounds=await getAllCampground();
+    res.send(campgrounds).status(200);
+});
 
 app.put('/api/HomePage',(req,res)=>{
     var campgroundInfo=getAllCampground();

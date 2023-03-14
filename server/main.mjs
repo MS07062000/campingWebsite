@@ -118,7 +118,7 @@ export async function getCommentForCampground(campgroundName) {
 }
 
 export async function getAllCampground() {
-  await db.collection("campgrounds").find({}).toArray();
+  return await db.collection("campgrounds").find({}).toArray();
 }
 
 export async function add(){

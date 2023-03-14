@@ -1,7 +1,7 @@
-const campCardTemplate=document.createElement('template');
+const campCardTemplate = document.createElement('template');
 
-campCardTemplate.innerHTML=
-`<link rel="stylesheet" href="../CampCard/style.css">
+campCardTemplate.innerHTML =
+    `<link rel="stylesheet" href="../CampCard/style.css">
 <div class="campContainer">
 <img class="campImage"></img>
 <p class="campName"></p>
@@ -9,16 +9,21 @@ campCardTemplate.innerHTML=
 <div class="viewCampgroundButton">View Campground</div>
 </div>`;
 
-class CampCard extends HTMLElement{
-    constructor(){
+class CampCard extends HTMLElement {
+    constructor() {
         super();
         this.attachShadow({ mode: "open" });
         this.shadowRoot.appendChild(campCardTemplate.content.cloneNode(true));
-        this.shadowRoot.querySelector('.campImage').setAttribute('src',this.hasAttribute("img")?this.getAttribute("img"):"");
-        this.shadowRoot.querySelector('.campName').textContent=this.hasAttribute("campName")?this.getAttribute("campName"):"";
-        this.shadowRoot.querySelector('.campDescription').textContent=this.hasAttribute("campDescription")?this.getAttribute("campDescription"):"";
-       
     }
+    static get observedAttributes() { return ['img', 'campName','campDescription']; }
+
+    attributeChangedCallback() {
+        console.log(this);
+        this.shadowRoot.querySelector('.campImage').setAttribute('src', this.hasAttribute("img") ? this.getAttribute("img") : "");
+        this.shadowRoot.querySelector('.campName').textContent = this.hasAttribute("campName") ? this.getAttribute("campName") : "";
+        this.shadowRoot.querySelector('.campDescription').textContent = this.hasAttribute("campDescription") ? this.getAttribute("campDescription") : "";
+    }
+
 }
 
-window.customElements.define("camp-card",CampCard);
+window.customElements.define("camp-card", CampCard);
