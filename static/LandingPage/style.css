@@ -7,70 +7,221 @@ body {
     padding: 0;
 }
 
-a{
+a {
     text-decoration: none;
 }
 
-.container {
-    overflow: hidden;
-    margin: 0%;
-    height: 100vh;
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
+
+@media only screen and (min-device-width:320px) {
+    .container {
+        display: grid;
+    }
+
+    .part1 {
+        grid-column: 1;
+        grid-row: 3;
+        margin: 5%;
+        font-size: 1.1rem;
+    }
+
+    .logo {
+        grid-column: 1;
+        grid-row: 1/2;
+        margin: 5%;
+    }
+
+    .introduction {
+        font-weight: 900;
+        font-size: 2.8rem;
+        margin: 0%;
+    }
+
+    .keypoints {
+        display: flex;
+        flex-wrap: nowrap;
+        margin-block-start: 2%;
+        margin-block-end: 2%;
+    }
+
+    .checkmark {
+        width: 80%;
+    }
+
+    .viewCampgroundsButton {
+        background-color: black;
+        color: white;
+        text-align: center;
+        padding: 15px 0%;
+        width: 70%;
+        margin-top: 5%;
+        border-radius: 5px;
+    }
+
+    .sponsorsContainer {
+        margin-top: 10%;
+    }
+
+    .sponsorsList {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        flex-direction: row;
+    }
+
+    .campImage {
+        grid-column: 1;
+        grid-row: 2/3;
+    }
+
+    .tabletMobileLandingImage {
+        display: block;
+        width:105%;
+    }
+
+    .desktopLandingImage {
+        display: none;
+    }
 }
 
-.part1{
-    margin: 1% 10.5% 0% 10.5%;
-    height:100vh;
+
+@media only screen and (min-device-width:768px) {
+    .container {
+        display: grid;
+    }
+
+    .part1 {
+        grid-column: 1;
+        grid-row: 3;
+        margin: 5%;
+        font-size: 1.2rem;
+    }
+
+    .logo {
+        grid-column: 1;
+        grid-row: 1/2;
+        margin: 5%;
+    }
+
+    .introduction {
+        font-weight: 900;
+        font-size: 3.125rem;
+        margin: 0%;
+    }
+
+    .keypoints {
+        display: flex;
+        flex-wrap: nowrap;
+        margin-block-start: 2%;
+        margin-block-end: 2%;
+    }
+
+    .checkmark {
+        width: 80%;
+    }
+
+    .viewCampgroundsButton {
+        background-color: black;
+        color: white;
+        text-align: center;
+        padding: 15px 0%;
+        width: 30%;
+        margin-top: 3%;
+        border-radius: 5px;
+    }
+
+    .sponsorsContainer {
+        margin-top: 10%;
+    }
+
+    .sponsorsList {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        flex-direction: row;
+    }
+
+    .campImage {
+        grid-column: 1;
+        grid-row: 2/3;
+    }
+
+    .tabletMobileLandingImage {
+        display: block;
+    }
+
+    .desktopLandingImage {
+        display: none;
+    }
 }
 
-.logo{
-    display: flex;
-    align-items: center;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-}
 
-.introduction{
-    font-weight: 900;
-    font-size: 50px;
-    margin: 15% 0% 5% 0%;
-}
+@media only screen and (min-device-width:1024px) {
+    .container {
+        display: grid;
+        grid-template-columns: 55% 45%;
+    }
 
-.keypoints{
-    display: flex;
-    flex-wrap: nowrap;
-    margin-block-start: 0.7em;
-    margin-block-end: 0.7em;
-}
+    .part1 {
+        grid-column: 1;
+        grid-row: 2/5;
+        margin: 0% 15%;
+    }
 
-.checkmark{
-    width:80%;
-}
+    .logo {
+        grid-column: 1;
+        grid-row: 1/2;
+        margin: 5% 15%;
+    }
 
-.viewCampgroundsButton{
-    background-color: black;
-    color: white;
-    text-align: center;
-    padding: 5% 0%;
-    font-size: 15px;
-    width:40%;
-    margin-top: 1%;
-    border-radius: 5px;
-}
+    .introduction {
+        font-weight: 900;
+        font-size: 50px;
+        margin: 15% 0% 5% 0%;
+    }
 
-.sponsorsContainer{
-    margin-top: 10%;
-}
+    .keypoints {
+        display: flex;
+        flex-wrap: nowrap;
+        margin-block-start: 0.7em;
+        margin-block-end: 0.7em;
+    }
 
-.sponsorsList{
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: nowrap;
-    flex-direction: row;
-}
+    .checkmark {
+        width: 80%;
+    }
 
-.campImage{
-    width: 50%;
+    .viewCampgroundsButton {
+        background-color: black;
+        color: white;
+        text-align: center;
+        padding: 5% 0%;
+        font-size: 15px;
+        width: 40%;
+        margin-top: 1%;
+        border-radius: 5px;
+    }
+
+    .sponsorsContainer {
+        margin-top: 10%;
+    }
+
+    .sponsorsList {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        flex-direction: row;
+    }
+
+    .campImage {
+        grid-column: 2;
+        grid-row: 1/3;
+    }
+
+    .tabletMobileLandingImage {
+        display: none;
+    }
+
+    .desktopLandingImage {
+        display: inline-block;
+    }
 }

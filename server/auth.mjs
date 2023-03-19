@@ -14,11 +14,9 @@ export async function checkPassword(password, hash) {
     return await bcrypt.compare(password, hash);
 }
 
-export function logOut() {
-
-}
-
 export async function validatingToken(token,sessionId) {
+    console.log("Token :" +token);
+    console.log("Session Id: "+sessionId);
     return new Promise((resolve, reject) => {
         jwt.verify(token, sessionId, (err, decoded) => {
             if (err) {

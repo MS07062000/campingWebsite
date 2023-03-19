@@ -1,3 +1,10 @@
+let userName;
+fetch("/api/userName").then((result)=>{
+    userName=result;
+});
+
+
+document.body.querySelector(".userName").textContent=userName;
 let hamburgermenu = document.body.querySelector('.hamburger');
 let crossSign = document.body.querySelector('.crossSign');
 hamburgermenu.addEventListener('click', (event) => {
@@ -65,6 +72,7 @@ form.addEventListener('submit', async(event) => {
         "image": campImage,
         "description": form.querySelector('.description').value,
     };
+
 
     fetch("http://127.0.0.1:3000/api/addCampground", {
         method: "POST",

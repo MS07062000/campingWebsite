@@ -1,7 +1,7 @@
 import { connectToDatabase } from '../server/mongodb.mjs';
 import { MongoClient } from 'mongodb';
 import { db } from '../server/mongodb.mjs';
-import { checkPassword, setPassword, tokenGeneration } from './auth.mjs';
+import { checkPassword, setPassword, tokenGeneration, validatingToken } from './auth.mjs';
 
 export async function connect() {
   await connectToDatabase();
@@ -95,11 +95,20 @@ async function storeSessionToken(userInfo, response) {
   console.log(JSON.stringify(token));
   response.cookie("access-token", token, {
     httpOnly: false,
+    signed:true,
   }).sendStatus(200);
   console.log("Successfully added token in session");
 }
 
 
+export async function logOut(token){
+  await db.collection("session").findOneAndDelete({ "token": token});
+}
+export async function validateSession(token){
+  let userSessionInfo=(await db.collection("session").find({"token":token}).toArray())[0];
+  console.log(JSON.stringify(userSessionInfo));
+  return await validatingToken(token,userSessionInfo._id.toString());
+}
 
 export async function addComment(commentDetails) {
   await db.collection("comments").insertOne(commentDetails);
