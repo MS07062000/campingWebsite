@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,7 @@
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="../AddNewComment/style.css">
 </head>
+
 <body>
     <div class="container">
         <div class="header">
@@ -23,12 +25,15 @@
             </div>
         </div>
         <div class="commentBody">
-            <p class="commentTitle">Add New Comment</p>
-            <p class="descriptionTitle">Description</p>
-            <textarea ,maxlength="500" class="comment" placeholder="This was probably the best camp i've visited this past year, definitely recommend visiting any time soon."></textarea>
-            <div class="postComment">
-                Post Comment
-            </div>
+            <form name="addCommentForm">
+                <p class="commentTitle">Add New Comment</p>
+                <p class="descriptionTitle">Description</p>
+                <textarea ,maxlength="500" class="comment"
+                    placeholder="This was probably the best camp i've visited this past year, definitely recommend visiting any time soon."></textarea>
+                <button class="postComment">
+                    Post Comment
+                </button>
+            </form>
         </div>
         <div class="footer">
             <img src="/Assets/Logo.svg">
@@ -36,4 +41,5 @@
     </div>
 </body>
 <script src="../CampCard/campcard.js" type="text/javascript"></script>
+
 </html>

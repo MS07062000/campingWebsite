@@ -1,7 +1,7 @@
 import { MongoClient } from 'mongodb';
 // Connection URI
 const uri =
-  `mongodb://user123:99605510-a7c8-11ed-8134-028b791895a5@139.59.63.151:27017/test`;
+  `mongodb://user123:99605510-a7c8-11ed-8134-028b791895a5@127.0.0.1:27017/test`;
 
 // Create a new MongoClient
 const client = new MongoClient(uri);

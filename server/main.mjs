@@ -2,6 +2,7 @@ import { connectToDatabase } from '../server/mongodb.mjs';
 import { MongoClient } from 'mongodb';
 import { db } from '../server/mongodb.mjs';
 import { checkPassword, setPassword, tokenGeneration, validatingToken } from './auth.mjs';
+import cookieParser from 'cookie-parser';
 
 export async function connect() {
   await connectToDatabase();
@@ -93,7 +94,13 @@ async function storeSessionToken(userInfo, response) {
   let token = await tokenGeneration({}, sessionId.toString());
   await db.collection("session").updateOne({"_id":sessionId},{$set:{"token":token}});
   console.log(JSON.stringify(token));
-  response.cookie("access-token", token, {
+
+  response.cookie("userName",userInfo.userName,{
+    httpOnly: false,
+    signed:true,
+  });
+
+  response.cookie("access-token",token, {
     httpOnly: false,
     signed:true,
   }).sendStatus(200);
@@ -101,9 +108,14 @@ async function storeSessionToken(userInfo, response) {
 }
 
 
-export async function logOut(token){
-  await db.collection("session").findOneAndDelete({ "token": token});
+export async function logOut(request,response){
+  await db.collection("session").findOneAndDelete({ "token": request.signedCookies["access-token"]});
+  await response.clearCookie("access-token");
+  await response.clearCookie("userName");
+  response.sendStatus(200);
 }
+
+
 export async function validateSession(token){
   let userSessionInfo=(await db.collection("session").find({"token":token}).toArray())[0];
   console.log(JSON.stringify(userSessionInfo));
@@ -131,6 +143,5 @@ export async function getAllCampground() {
 }
 
 export async function add(){
-
   await db.collection("campgrounds").insertOne();
 }

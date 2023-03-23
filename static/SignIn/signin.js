@@ -13,6 +13,7 @@ document.querySelector('[name="signInForm"]').addEventListener("submit",(e)=>{
    })
    .then((result)=>{
       console.log(result);
+      location.href="/static/SearchPage/search.html"
    }).catch((err)=>{
       console.log(err);
    });

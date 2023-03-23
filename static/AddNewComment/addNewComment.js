@@ -1,25 +1,23 @@
-// const newCommentTemplate = document.createElement('template');
-// newCommentTemplate.innerHTML = `
-// <link rel="stylesheet" type="text/css" href="../AddNewComment/style.css">
-// <div class="commentBody">
-// <p class="commentTitle">Add New Comment</p>
-// <p class="descriptionTitle">Description</p>
-// <textarea ,maxlength="500" class="comment" placeholder="This was probably the best camp i've visited this past year, definitely recommend visiting any time soon."></textarea>
-// <div class="postComment">
-// Post Comment
-// </div>
-// </div>`
+let form = document.body.querySelector("[name=addCommentForm]");
 
-// class NewComment extends HTMLElement{
-//     constructor(){
-//         super();
-//         this.shadowRoot({mode:"open"});
-//         this.shadowRoot.appendChild(newCommentTemplate.cloneNode(true));
-//     }
-// }
 
-// window.customElements.define("new-comment",NewComment);
+form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    form.querySelector(".postComment").disabled = true;
+    let commentInfo = {
+        "campgroundName": campgroundName,
+        "comment": form.querySelector(".comment").value
+    };
 
-document.body.querySelector('.postComment').addEventListener(()=>{
+    fetch("http://127.0.0.1:3000/api/addComment", {
+        method: "POST",
+        body:JSON.stringify(commentInfo),
+        headers: { "Content-Type": "application/json" }
+    }).then((result) => {
+        console.log(result);
+    }).catch((err) => {
+        console.log(err);
+    });
 
+    form.querySelector(".postComment").disabled = false;
 });
