@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SignUp</title>
     <link rel="stylesheet" type="text/css" href="../SearchPage/style.css">
+    <link rel="stylesheet" type="text/css" href="../Header/style.css">
+    <script type="text/javascript" src="../Header/header.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -15,23 +17,27 @@
         <div class="header">
             <div class="logoAndHomeButton">
                 <img src="/Assets/Logo.svg">
-                <p class="home">Home</p>
-            </div>
-            <div class="loggedOut">
-                <p><a href="../SignIn/signin.html">Login</a></p>
-                <a href="../SignUp/signup.html"><div class="createAnAccount"> Create an account</div></a>
+                <a href="../SearchPage/search.html"><p class="home">Home</p></a>
             </div>
             <div class="loggedIn">
                 <p class="userName"></p>
                 <button class="logout">Logout</button>
             </div>
+            <div class="loggedOut">
+                <p><a href="../SignIn/signin.html">Login</a></p>
+                <a href="../SignUp/signup.html"><div class="createAnAccount"> Create an account</div></a>
+            </div>
+            <div class="hamburgermenu">
+                <img class="hamburger" src="/Assets/Hamburger Menu.svg">
+                <p class="crossSign">&#9587;</p>
+            </div>
         </div>
         <div class="searchbar">
             <p class="welcomeMessage">Welcome to YelpCamp!</p>
             <p>View our hand-picked campgrounds from all over the world, or add your own.</p>
-            <input class="search" placeholder='<img src="/Assets/Search Icon.svg">Search for camps'>
+            <input class="search" placeholder='Search for camps'>
             <div class="searchButton">Search</div>
-            <p class="addNewCampground">Or add your own campground</p>
+            <a href="/static/AddNewCampground/addNewCampground.html"><p class="addNewCampground">Or add your own campground</p></a>
         </div>
         <div class="campGrounds">
             <camp-card img="/Assets/Camp Images/High Quality Images/Mount Ulap.png", campName="Mount Ulap", campDescription="One of the most famous hikes in Benguet is Mt Ulap in Itogon."></camp-card>

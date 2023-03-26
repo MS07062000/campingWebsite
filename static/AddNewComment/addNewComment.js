@@ -6,7 +6,9 @@ form.addEventListener('submit', async (event) => {
     form.querySelector(".postComment").disabled = true;
     let commentInfo = {
         "campgroundName": campgroundName,
-        "comment": form.querySelector(".comment").value
+        "comment": form.querySelector(".comment").value,
+        "name":document.body.querySelector(".userName").textContent,
+        "time":Date.now()
     };
 
     fetch("http://127.0.0.1:3000/api/addComment", {

@@ -5,10 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SignUp</title>
-    <link rel="stylesheet" type="text/css" href="../Footer/style.css">
+    <link rel="stylesheet" type="text/css" href="../Header/style.css">
     <link rel="stylesheet" type="text/css" href="../IndividualCampgroundPage/style.css">
-    <script src="../IndividualCampgroundPage/individualCampground.js"></script>
+    <link rel="stylesheet" type="text/css" href="../Footer/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -17,15 +16,24 @@
         <div class="header">
             <div class="logoAndHomeButton">
                 <img src="/Assets/Logo.svg">
-                <p class="home">Home</p>
+                <a href="../SearchPage/search.html">
+                    <p class="home">Home</p>
+                </a>
             </div>
-            <div class="loggedInOrWithoutLoginIn">
-                <p>Login</p>
-                <div class="createAnAccount">Create an account</div>
+            <div class="loggedIn">
+                <p class="userName"></p>
+                <button class="logout">Logout</button>
             </div>
-            <!-- <div class="hamburgermenu">
-                <img src="/Assets/Hamburger Menu.svg">
-            </div> -->
+            <div class="loggedOut">
+                <p><a href="../SignIn/signin.html">Login</a></p>
+                <a href="../SignUp/signup.html">
+                    <div class="createAnAccount"> Create an account</div>
+                </a>
+            </div>
+            <div class="hamburgermenu">
+                <img class="hamburger" src="/Assets/Hamburger Menu.svg">
+                <p class="crossSign">&#9587;</p>
+            </div>
         </div>
         <div class="mainBody">
             <!-- <div class="mapImage"> -->
@@ -36,21 +44,17 @@
             <!-- </div> -->
             <div class="campDescriptionAndComment">
                 <div class="campImageWithDescription">
-                    <img src="/Assets/Camp Images/High Quality Images/Seven Sisters Waterfall.jpg" class="campImage">
+                    <img class="campImage">
                     <p class="campName">
-                        Mount Ulap
                         <span class="price">
-                            $104.99/night
                         </span>
                     </p>
-                    <p class="campgroundInformation">Mount Ulap is a 7.7 kilometer moderately trafficked point-to-point
-                        trail located near Tuba, Benguet, Philippines that offers the chance to see wildlife and is
-                        rated as moderate. The trail is primarily used for hiking.</p>
-                    <p class="campgroundDefinedByUser">Submitted by Andrew Mike</p>
+                    <p class="campgroundInformation"></p>
+                    <p class="campgroundDefinedByUser"></p>
                 </div>
                 <div class="campComments">
                     <div class="commentZone">
-                        <div class="userNameandComment">
+                        <!-- <div class="userNameandComment">
                             <p class="userName">
                                 Adam Jones
                                 <span class="time">
@@ -61,58 +65,25 @@
                                 while
                                 to
                                 figure out how to get there but it was amazing!</p>
-                        </div>
-                        <div class="userNameandComment">
-                            <p class="userName">
-                                Adam Jones
-                                <span class="time">
-                                    13h ago
-                                </span>
-                            </p>
-                            <p class="userCommentForCampground">Honestly one of the best experiences ever, took us a
-                                while
-                                to
-                                figure out how to get there but it was amazing!</p>
-                        </div>
-                        <div class="userNameandComment">
-                            <p class="userName">
-                                Adam Jones
-                                <span class="time">
-                                    13h ago
-                                </span>
-                            </p>
-                            <p class="userCommentForCampground">Honestly one of the best experiences ever, took us a
-                                while
-                                to
-                                figure out how to get there but it was amazing!</p>
-                        </div>
-                        <div class="userNameandComment">
-                            <p class="userName">
-                                Adam Jones
-                                <span class="time">
-                                    13h ago
-                                </span>
-                            </p>
-                            <p class="userCommentForCampground">Honestly one of the best experiences ever, took us a
-                                while
-                                to
-                                figure out how to get there but it was amazing!</p>
-                        </div>
+                        </div> -->
+
                     </div>
-                    <a href="../AddNewComment/addNewComment.html"><div class="leaveAReviewButton">
-                        <div>
-                            <img src="/Assets/Chat Bubble.svg">
-                        </div>
-                        <p>Leave a Review</p>
-                    </div>
-                </a>
+                    <a href="../AddNewComment/addNewComment.html">
+                        <div class="leaveAReviewButton">
+                            <div>
+                                <img src="/Assets/Chat Bubble.svg">
+                            </div>
+                            <p>Leave a Review</p>
+                    </a>
                 </div>
             </div>
         </div>
-        <my-footer></my-footer>
     </div>
-    <script src="../Footer/Footer.js"></script>
-   
+    <my-footer></my-footer>
+    </div>
 </body>
+<script type="text/javascript" src="../Header/header.js"></script>
+<script type="text/javascript" src="../IndividualCampgroundPage/individualCampground.js"></script>
+<script type="text/javascript" src="../Footer/Footer.js"></script>
 
 </html>

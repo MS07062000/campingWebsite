@@ -26,7 +26,7 @@ a{
 }
 
 
-.logoAndHomeButton{
+/* .logoAndHomeButton{
     display: flex;
     align-items: center;
     flex-wrap: nowrap;
@@ -60,7 +60,7 @@ a{
     color: white;
     padding: 20px;
     border-radius: 5px;
-}
+} */
 
 .searchbar{
     padding: 50px 700px 50px 50px;
@@ -82,6 +82,10 @@ a{
     border-color: white;
     border-style: solid;
     width: 270px;
+    padding-left: 32px;
+    background-image: url('/Assets/Search Icon.svg');
+    background-repeat: no-repeat;
+    background-position: 7px center;
 }
 
 .searchButton{
@@ -97,10 +101,9 @@ a{
 }
 
 .campGrounds{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    flex-direction: row;
+    display:grid;
+    grid-template-columns: repeat(4, 25%);
+    grid-auto-flow: dense;
 }
 
 .footer{

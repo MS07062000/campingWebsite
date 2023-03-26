@@ -1,31 +1,4 @@
-async function addCampground() {
-    let userName;
-    var response = await fetch("/api/userName", { method: "GET" });
-    userName=(await response.json())["userName"];
-    console.log(userName);
-    document.body.querySelector(".userName").textContent = userName;
-
-    document.body.querySelector(".logout").addEventListener("click", (event) => {
-        fetch("/api/logout").then((result) => {
-            console.log(result);
-        });
-    });
-
-    let hamburgermenu = document.body.querySelector('.hamburger');
-    let crossSign = document.body.querySelector('.crossSign');
-    hamburgermenu.addEventListener('click', (event) => {
-        hamburgermenu.style.display = "none";
-        crossSign.style.display = "block";
-        document.body.querySelector(".loggedIn").style.display = "flex";
-    });
-
-    crossSign.addEventListener('click', (event) => {
-        hamburgermenu.style.display = "block";
-        crossSign.style.display = "none";
-        document.body.querySelector(".loggedIn").style.display = "none";
-    });
-
-
+function addCampground() {
     let form = document.body.querySelector("[name=addNewCampgroundForm]");
     let imageOptions = form.querySelector('[name=imageOptions]');
     let imageUploadType;
@@ -77,6 +50,7 @@ async function addCampground() {
             "price": form.querySelector('.price').value,
             "image": campImage,
             "description": form.querySelector('.description').value,
+            "submittedBy":document.body.querySelector(".userName").textContent
         };
 
 
@@ -91,10 +65,7 @@ async function addCampground() {
         });
         form.querySelector("button").disabled = false;
     });
-
-
 }
-
 
 function base64(file) {
     return new Promise((resolve) => {
@@ -109,20 +80,20 @@ function base64(file) {
     });
 }
 
-    // function sendFile(file) {
-    //     const uri = "/index.php";
-    //     const xhr = new XMLHttpRequest();
-    //     const fd = new FormData();
+// function sendFile(file) {
+//     const uri = "/index.php";
+//     const xhr = new XMLHttpRequest();
+//     const fd = new FormData();
 
-    //     xhr.open("POST", uri, true);
-    //     xhr.onreadystatechange = () => {
-    //         if (xhr.readyState === 4 && xhr.status === 200) {
-    //             alert(xhr.responseText); // handle response.
-    //         }
-    //     };
-    //     fd.append('myFile', file);
-    //     // Initiate a multipart/form-data upload
-    //     xhr.send(fd);
-    // }
+//     xhr.open("POST", uri, true);
+//     xhr.onreadystatechange = () => {
+//         if (xhr.readyState === 4 && xhr.status === 200) {
+//             alert(xhr.responseText); // handle response.
+//         }
+//     };
+//     fd.append('myFile', file);
+//     // Initiate a multipart/form-data upload
+//     xhr.send(fd);
+// }
 
-    addCampground();
+addCampground();

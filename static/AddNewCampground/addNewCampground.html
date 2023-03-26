@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="../AddNewCampground/style.css">
+    <link rel="stylesheet" type="text/css" href="../Header/style.css">
 </head>
 
 <body>
@@ -14,11 +15,15 @@
         <div class="header">
             <div class="logoAndHomeButton">
                 <img src="/Assets/Logo.svg">
-                <p class="home">Home</p>
+                <a href="../SearchPage/search.html"><p class="home">Home</p></a>
             </div>
             <div class="loggedIn">
                 <p class="userName"></p>
-                <div class="logout">Logout</div>
+                <button class="logout">Logout</button>
+            </div>
+            <div class="loggedOut">
+                <p><a href="../SignIn/signin.html">Login</a></p>
+                <a href="../SignUp/signup.html"><div class="createAnAccount"> Create an account</div></a>
             </div>
             <div class="hamburgermenu">
                 <img class="hamburger" src="/Assets/Hamburger Menu.svg">
@@ -53,6 +58,6 @@
         </div>
     </div>
 </body>
-<script src="../CampCard/campcard.js" type="text/javascript"></script>
 <script src="../AddNewCampground/addNewCampground.js" type="text/javascript"></script>
+<script src="../Header/header.js" type="text/javascript"></script>
 </html>

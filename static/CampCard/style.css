@@ -2,38 +2,43 @@
     font-size: 100%;
 }
 
-a{
+a {
     text-decoration: none;
 }
 
-.campContainer{
+.campContainer {
     border-style: solid;
     border-radius: 5px;
     border-color: white;
     box-shadow: rgb(50 50 93 / 25%) 0px 0px 5px 0px;
     padding: 10px;
     width: 340px;
-    margin:0% 8% 8% 0%;
+    margin: 0% 8% 8% 0%;
 }
-.campImage{
+
+.campImage {
     width: 338px;
     height: 150px;
     border-radius: 5px;
 }
 
-.campName{
+.campName {}
 
+.campDescription {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
-.campDescription{
-
-}
-
-.viewCampgroundButton{
+.viewCampgroundButton {
     border-style: solid;
     border-radius: 5px;
     padding: 10px 0px;
     text-align: center;
     border-color: grey;
+    border-width: 0.25rem;
+    width: 100%;
+    font-size: 1rem;
+    background-color: white;
 }
-

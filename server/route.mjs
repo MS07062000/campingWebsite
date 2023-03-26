@@ -48,6 +48,15 @@ app.post('/api/signUp', async (req, res,next) => {
     await signUp(req.body, res);
 });
 
+app.get('/api/userName',(req,res)=>{
+    console.log(req.signedCookies["userName"]);
+    res.send({"userName":req.signedCookies["userName"]}).status(200);
+});
+
+app.get('/api/logout',async(req,res)=>{
+    await logOut(req,res);
+});
+
 app.post('/api/addComment', authenticate, async (req, res) => {
     console.log(req.body);
     await addComment(req.body);
@@ -66,7 +75,7 @@ app.post('/api/Image', authenticate, (req, res) => {
     res.sendStatus(200);
 });
 
-app.get('/api/allCampgrounds', authenticate, async (req, res) => {
+app.get('/api/allCampgrounds', async (req, res) => {
     let campgrounds = await getAllCampground();
     res.send(campgrounds).status(200);
 });
@@ -76,15 +85,14 @@ app.put('/api/HomePage', (req, res) => {
     res.send(campgroundInfo);
 });
 
-app.get('/api/userName',(req,res)=>{
-    console.log(req.signedCookies["userName"]);
-    res.send({"userName":req.signedCookies["userName"]}).status(200);
+app.get('/api/campInfo/:campgroundName',async(req,res)=>{
+    let campInfo={};
+    campInfo["campDetails"]=await getCampgroundInfo(req.params.campgroundName);
+    campInfo["campComments"]=await getCommentForCampground(req.params.campgroundName);
+    res.send(campInfo).status(200);
 });
 
-app.get('/api/logout',async(req,res)=>{
-    await logOut(req,res);
 
-});
 
 app.listen(port, () => {
     console.log("server started" + Date.now());
