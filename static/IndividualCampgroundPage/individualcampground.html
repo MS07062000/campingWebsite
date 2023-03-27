@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../Header/style.css">
-    <link rel="stylesheet" type="text/css" href="../IndividualCampgroundPage/style.css">
-    <link rel="stylesheet" type="text/css" href="../Footer/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/Header/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/IndividualCampgroundPage/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/Footer/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -16,19 +16,15 @@
         <div class="header">
             <div class="logoAndHomeButton">
                 <img src="/Assets/Logo.svg">
-                <a href="../SearchPage/search.html">
-                    <p class="home">Home</p>
-                </a>
+                <a href="/search"><p class="home">Home</p></a>
             </div>
             <div class="loggedIn">
                 <p class="userName"></p>
                 <button class="logout">Logout</button>
             </div>
             <div class="loggedOut">
-                <p><a href="../SignIn/signin.html">Login</a></p>
-                <a href="../SignUp/signup.html">
-                    <div class="createAnAccount"> Create an account</div>
-                </a>
+                <p><a href="/signIn">Login</a></p>
+                <a href="/signUp"><div class="createAnAccount"> Create an account</div></a>
             </div>
             <div class="hamburgermenu">
                 <img class="hamburger" src="/Assets/Hamburger Menu.svg">
@@ -45,7 +41,9 @@
             <div class="campDescriptionAndComment">
                 <div class="campImageWithDescription">
                     <img class="campImage">
-                    <p class="campName">
+                    <p>
+                        <span class="campName">
+                        </span>
                         <span class="price">
                         </span>
                     </p>
@@ -68,7 +66,7 @@
                         </div> -->
 
                     </div>
-                    <a href="../AddNewComment/addNewComment.html">
+                    <a href="/static/AddNewComment/addNewComment.html">
                         <div class="leaveAReviewButton">
                             <div>
                                 <img src="/Assets/Chat Bubble.svg">
@@ -82,8 +80,8 @@
     <my-footer></my-footer>
     </div>
 </body>
-<script type="text/javascript" src="../Header/header.js"></script>
-<script type="text/javascript" src="../IndividualCampgroundPage/individualCampground.js"></script>
-<script type="text/javascript" src="../Footer/Footer.js"></script>
+<script type="text/javascript" src="/static/Header/header.js"></script>
+<script type="text/javascript" src="/static/IndividualCampgroundPage/individualCampground.js"></script>
+<script type="text/javascript" src="/static/Footer/Footer.js"></script>
 
 </html>

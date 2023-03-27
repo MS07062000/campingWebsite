@@ -1,14 +1,16 @@
-async function campInfo(campName){
+async function getCampInfo(campName){
     document.title=campName;
-    let campInfo=await fetch("/api/campInfo/campName");
-    console.log(await campInfo);
-    let campDetails=await campInfo["campDetails"];
-    let campComments=await campInfo["campComments"];
+    let campData=await(await fetch(`/api/campInfo/${campName}`)).json();
+    console.log(campData);
+    //campInfo=await campInfo.json();
+
+    let campDetails=campData["campDetails"];
+    let campComments=campData["campComments"];
     
     
     //remaining to add is map info keep in mind
 
-
+    document.body.querySelector(".campImage").setAttribute("src",campDetails["image"]);
     document.body.querySelector(".campName").textContent=campDetails["campgroundName"];
     document.body.querySelector(".price").textContent=campDetails["price"];
     document.body.querySelector(".campgroundInformation").textContent=campDetails["description"];
@@ -62,4 +64,4 @@ function commentTime(time){
 }
 
 
-campInfo(sessionStorage.getItem("campName"));
+getCampInfo(location.href.split("/campground/")[1].split("?")[0]);

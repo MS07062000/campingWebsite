@@ -131,11 +131,13 @@ export async function addCampground(campGroundDetails) {
 }
 
 export async function getCampgroundInfo(campgroundName) {
-  return await db.collection("campgrounds").findOne({ 'name': campgroundName });
+  let campInfo=await db.collection("campgrounds").findOne({ 'campgroundName': campgroundName });
+  return campInfo;
 }
 
 export async function getCommentForCampground(campgroundName) {
-  return await db.collection("comments").findOne(campgroundName);
+  let campComment=await db.collection("comments").find({ 'campgroundName': campgroundName }).toArray();
+  return campComment;
 }
 
 export async function getAllCampground() {
