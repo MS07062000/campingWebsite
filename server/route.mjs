@@ -79,7 +79,7 @@ app.get('/api/logout', async (req, res) => {
     await logOut(req, res);
 });
 
-app.post('/api/addComment', authenticate, async (req, res) => {
+app.post('/api/addComment/:campgroundName', authenticate, async (req, res) => {
     console.log(req.body);
     await addComment(req.body);
     res.sendStatus(200);
@@ -114,7 +114,6 @@ app.get('/api/campInfo/:campgroundName', async (req, res) => {
     console.log(campInfo);
     res.send(campInfo).status(200);
 });
-
 
 
 app.listen(port, () => {

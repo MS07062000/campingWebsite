@@ -38,6 +38,10 @@ async function getCampInfo(campName){
         document.body.querySelector(".commentZone").appendChild(commentContainer);
 
     });
+    
+    document.body.querySelector(".leaveAReviewButton").addEventListener("click",(event)=>{
+        location.href=`/addComment/${encodeURIComponent(campDetails["campgroundName"])}`;
+    });
 
 }
 

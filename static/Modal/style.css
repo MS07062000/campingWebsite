@@ -1,0 +1,76 @@
+html,
+body {
+    margin: 0;
+    height: 100%;
+}
+
+my-modal {
+    display: none;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    animation-name: popupFromBottom;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+    animation-delay: 0s;
+}
+
+.overlayModal {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    animation-name: popupFromBottom;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+    animation-delay: 0s;
+    border:solid;
+}
+
+.crossButton {
+    margin-left: auto;
+    background-color: black;
+    color: white;
+    width: 2%;
+    font-size: 2rem;
+}
+
+.closeButton {
+    background-color: black;
+    color: white;
+    width: 35%;
+    padding: 5px;
+    font-size: 2rem;
+}
+
+.correctSign {
+    display: none;
+    margin-top: 7%;
+}
+
+.errorSign {
+    display: block;
+    margin-top: 7%;
+}
+
+@keyframes popupFromBottom {
+    0% {
+        transform: translate(-50%,150%);
+    }
+
+    100% {
+        transform: translate(-50%,-50%);
+    }
+}

@@ -1,17 +1,18 @@
 const footerTemplate = document.createElement("div");
 
 footerTemplate.innerHTML =
-`<link rel="stylesheet" type="text/css" href="../Footer/style.css"> 
-<div class="footer">
+    `<link rel="stylesheet" href="/static/Footer/style.css"> 
+    <div class="footer">
         <img src="/Assets/Logo.svg">
-    </div>`;
+    </div>
+    `;
 
 class Footer extends HTMLElement {
     constructor() {
         super();
     }
-    connectedCallback(){
-        const shadowRoot=this.attachShadow({ mode: "open" });
+    connectedCallback() {
+        const shadowRoot = this.attachShadow({ mode: "open" });
         shadowRoot.appendChild(footerTemplate.cloneNode(true));
     }
 }

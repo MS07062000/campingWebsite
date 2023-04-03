@@ -16,7 +16,9 @@
         <div class="header">
             <div class="logoAndHomeButton">
                 <img src="/Assets/Logo.svg">
-                <a href="/search"><p class="home">Home</p></a>
+                <a href="/search">
+                    <p class="home">Home</p>
+                </a>
             </div>
             <div class="loggedIn">
                 <p class="userName"></p>
@@ -24,7 +26,9 @@
             </div>
             <div class="loggedOut">
                 <p><a href="/signIn">Login</a></p>
-                <a href="/signUp"><div class="createAnAccount"> Create an account</div></a>
+                <a href="/signUp">
+                    <div class="createAnAccount"> Create an account</div>
+                </a>
             </div>
             <div class="hamburgermenu">
                 <img class="hamburger" src="/Assets/Hamburger Menu.svg">
@@ -66,21 +70,19 @@
                         </div> -->
 
                     </div>
-                    <a href="/static/AddNewComment/addNewComment.html">
-                        <div class="leaveAReviewButton">
-                            <div>
-                                <img src="/Assets/Chat Bubble.svg">
-                            </div>
-                            <p>Leave a Review</p>
-                    </a>
+                    <button class="leaveAReviewButton">
+                        <div>
+                            <img src="/Assets/Chat Bubble.svg">
+                        </div>
+                        <p>Leave a Review</p>
+                    </button>
                 </div>
             </div>
         </div>
-    </div>
-    <my-footer></my-footer>
+        <my-footer></my-footer>
     </div>
 </body>
-<script type="text/javascript" src="/static/Header/header.js"></script>
+<script type="module" src="/static/Header/header.js"></script>
 <script type="text/javascript" src="/static/IndividualCampgroundPage/individualCampground.js"></script>
 <script type="text/javascript" src="/static/Footer/Footer.js"></script>
 
