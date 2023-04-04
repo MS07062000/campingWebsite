@@ -141,7 +141,7 @@ export async function getCommentForCampground(campgroundName) {
 }
 
 export async function getAllCampground() {
-  return await db.collection("campgrounds").find({}).toArray();
+  return await db.collection("campgrounds").find({'authenticated':1}).toArray();
 }
 
 export async function add(){

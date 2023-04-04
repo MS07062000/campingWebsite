@@ -4,7 +4,7 @@ function addComment(campName) {
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
         form.querySelector(".postComment").disabled = true;
-        document.getElementsByTagName("my-spinner")[0].style.display = "block";
+        document.querySelector("my-spinner").style.display = "block";
         let commentInfo = {
             "campgroundName": campName,
             "comment": form.querySelector(".comment").value,
@@ -21,10 +21,12 @@ function addComment(campName) {
             document.querySelector("my-modal").setAttribute("correct-message", "Thank you for sharing your thoughts about the camp. Your feedback is valuable to us and helps us improve our services.");
             document.querySelector("my-modal").style.display = "block";
             console.log(result);
+            modalRedirectURL="/search";
         }).catch((err) => {
             document.querySelector("my-spinner").style.display = "none";
             document.querySelector("my-modal").setAttribute("error-message", "We're sorry, but we encountered an error and couldn't add your feedback at this time. Please try again later or contact our support team for assistance.");
             document.querySelector("my-modal").style.display = "block";
+            modalRedirectURL="/search";
             console.log(err);
         });
 

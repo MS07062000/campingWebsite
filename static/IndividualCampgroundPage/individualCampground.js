@@ -23,18 +23,22 @@ async function getCampInfo(campName){
         userName.setAttribute("class","userName");
         userName.textContent=commentByUserInfo["name"];
 
-        let commentTime=document.querySelector("span");
-        commentTime.setAttribute("class","time");
-        commentTime.textContent=commentTime(commentByUserInfo["time"])+"ago";
+        let timeOfComment=document.createElement("span");
+        timeOfComment.setAttribute("class","time");
+        timeOfComment.textContent=commentTime(commentByUserInfo["time"])+"ago";
+        console.log(timeOfComment);
 
-        userName.appendChild(commentTime);
-        
+        userName.insertAdjacentElement("beforeend",timeOfComment);
+        console.log(userName);
+
         let commentByUser=document.createElement("p");
         commentByUser.setAttribute("class","userCommentForCampground");
         commentByUser.textContent=commentByUserInfo["comment"];
 
         commentContainer.appendChild(userName);
         commentContainer.appendChild(commentByUser);
+        console.log(commentContainer);
+        
         document.body.querySelector(".commentZone").appendChild(commentContainer);
 
     });
@@ -51,19 +55,22 @@ function commentTime(time){
     const diff = date2 - date1;
 
     const diffInDays = diff / (1000 * 60 * 60 * 24);
-    console.log(diffInDays);
+    // console.log(diffInDays);
 
     const diffInHours = diff / (1000 * 60 * 60);
-    console.log(diffInHours);
+    // console.log(diffInHours);
 
     const diffInMinutes = diff / (1000 * 60);
-    console.log(diffInMinutes);
+    // console.log(diffInMinutes);
     if(diffInDays>1){
-        return diffInDays+" days ";;
+        console.log(Math.floor(diffInDays));
+        return Math.floor(diffInDays)+" days ";
     }else if(diffInHours>1){
-        return diffInHours+" hrs ";
+        console.log(Math.floor(diffInHours));
+        return Math.floor(diffInHours)+" hrs ";
     }else{
-        return diffInMinutes+" minutes ";;
+        console.log(Math.floor(diffInMinutes));
+        return Math.floor(diffInMinutes)+" minutes ";
     }
 }
 

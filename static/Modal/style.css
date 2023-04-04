@@ -5,7 +5,7 @@ body {
 }
 
 my-modal {
-    /* display: none;
+    /* 
     align-items: center;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -14,6 +14,7 @@ my-modal {
     animation-fill-mode: forwards;
     animation-iteration-count: 1;
     animation-delay: 0s; */
+    display: none;
     position: fixed;
     width: 100%;
     height: 100%;

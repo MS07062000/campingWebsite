@@ -50,7 +50,8 @@ function addCampground() {
             "price": form.querySelector('.price').value,
             "image": campImage,
             "description": form.querySelector('.description').value,
-            "submittedBy":document.body.querySelector(".userName").textContent
+            "submittedBy":document.body.querySelector(".userName").textContent,
+            "authenticated":0,
         };
 
 
@@ -59,8 +60,14 @@ function addCampground() {
             body: JSON.stringify(campgroundInfo),
             headers: { "Content-Type": "application/json" }
         }).then((result) => {
+            document.querySelector("my-spinner").style.display = "none";
+            document.querySelector("my-modal").setAttribute("correct-message", "Thank you for submitting the information about the new camp. We appreciate your contribution to our community. Our team will review the details and add the camp to our directory within the next seven days. Thank you for your patience and for helping us make our platform more comprehensive.");
+            document.querySelector("my-modal").style.display = "block";
             console.log(result);
         }).catch((err) => {
+            document.querySelector("my-spinner").style.display = "none";
+            document.querySelector("my-modal").setAttribute("error-message", "We're sorry, but we encountered an error and couldn't add your feedback at this time. Please try again later or contact our support team for assistance.");
+            document.querySelector("my-modal").style.display = "block";
             console.log(err);
         });
         form.querySelector("button").disabled = false;

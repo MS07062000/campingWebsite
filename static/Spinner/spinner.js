@@ -9,8 +9,7 @@ loop autoplay></lottie-player>
 class Spinner extends HTMLElement {
     constructor() {
         super();
-        this.attachShadow({ mode: "open" });
-        this.shadowRoot.appendChild(spinnerTemplate.content.cloneNode(true));
+        this.appendChild(spinnerTemplate.content.cloneNode(true));
     }
 }
 

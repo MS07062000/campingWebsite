@@ -41,14 +41,20 @@ class Modal extends HTMLElement {
 
     connectedCallback() {
         this.querySelector(".crossButton").addEventListener("click", (event) => {
-            document.body.querySelector("my-modal").style.display = "none";
-            document.body.style.overflow="auto";
+            this.closeModal();
         });
 
         this.querySelector(".closeButton").addEventListener("click", (event) => {
-            document.body.querySelector("my-modal").style.display = "none";
-            document.body.style.overflow="auto";
+            this.closeModal();
         });
+    }
+
+    closeModal(){
+        document.body.querySelector("my-modal").style.display = "none";
+        document.body.style.overflow="auto";
+        if(modalRedirectURL!==undefined){
+            location.href=modalRedirectURL;
+        }
     }
 }
 
