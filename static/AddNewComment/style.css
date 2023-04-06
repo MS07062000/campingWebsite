@@ -7,16 +7,16 @@ body {
     padding: 0;
 }
 
-a{
+a {
     text-decoration: none;
 }
 
 @media only screen and (min-device-width:320px) {
     .container {
-        margin: 10% 5%;
+        margin: 7% 5%;
     }
 
-    .header{
+    /* .header {
         display: flex;
         justify-content: space-between;
         flex-wrap: nowrap;
@@ -24,11 +24,11 @@ a{
         align-items: center;
     }
 
-    .home{
+    .home {
         display: none;
     }
 
-    .loggedIn{
+    .loggedIn {
         display: none;
     }
 
@@ -37,7 +37,7 @@ a{
         display: flex;
         align-items: center;
         padding: 2px;
-    }
+    }*/
 
     .commentBody {
         padding: 0px;
@@ -54,32 +54,26 @@ a{
     }
 
     .comment {
-        width: 98%;
+        width: 100%;
+        box-sizing: border-box;
         height: 200px;
         vertical-align: text-top;
         margin-bottom: 5%;
         resize: none;
         background-color: #F5F5F5;
         border-color: #F5F5F5;
+        padding: 10px;
+        font-size: 1.1rem;
+        font-family: 'Times New Roman', Times, serif;
+        white-space: pre-wrap;
+        word-wrap: break-word;
     }
 
     .comment::-webkit-input-placeholder,
-    .comment::placeholder {
-        color: #C0C0C0;
-        padding: 10px;
-        font-size: 1.1rem;
-        font-family: 'Times New Roman', Times, serif;
-        white-space: pre-wrap;
-        word-wrap: break-word;
-    }
-
+    .comment::placeholder,
     :-ms-input-placeholder {
         color: #C0C0C0;
-        padding: 10px;
-        font-size: 1.1rem;
-        font-family: 'Times New Roman', Times, serif;
-        white-space: pre-wrap;
-        word-wrap: break-word;
+
     }
 
     .postComment {
@@ -94,9 +88,6 @@ a{
         justify-content: center;
     }
 
-    .footer {
-        margin: 30% 0%;
-    }
 }
 
 @media only screen and (min-device-width:768px) {
@@ -104,7 +95,8 @@ a{
         margin: 5%;
     }
 
-    .header{
+    /* 
+    .header {
         display: flex;
         justify-content: space-between;
         flex-wrap: nowrap;
@@ -112,7 +104,7 @@ a{
         align-items: center;
     }
 
-    .home{
+    .home {
         display: none;
     }
 
@@ -125,7 +117,7 @@ a{
         display: flex;
         align-items: center;
         padding: 5px;
-    }
+    } */
 
     .commentBody {
         padding: 0px;
@@ -143,32 +135,26 @@ a{
     }
 
     .comment {
-        width: 75%;
+        width: 100%;
+        box-sizing: border-box;
         height: 200px;
         vertical-align: text-top;
         margin-bottom: 20px;
         resize: none;
         background-color: #F5F5F5;
         border-color: #F5F5F5;
+        padding: 10px;
+        font-size: 1.25rem;
+        font-family: 'Times New Roman', Times, serif;
+        white-space: pre-wrap;
+        word-wrap: break-word;
     }
 
     .comment::-webkit-input-placeholder,
-    .comment::placeholder {
-        color: #C0C0C0;
-        padding: 10px;
-        font-size: 1.25rem;
-        font-family: 'Times New Roman', Times, serif;
-        white-space: pre-wrap;
-        word-wrap: break-word;
-    }
-
+    .comment::placeholder,
     :-ms-input-placeholder {
         color: #C0C0C0;
-        padding: 10px;
-        font-size: 1.25rem;
-        font-family: 'Times New Roman', Times, serif;
-        white-space: pre-wrap;
-        word-wrap: break-word;
+
     }
 
     .postComment {
@@ -178,21 +164,18 @@ a{
         padding: 10px 0px;
         font-size: 1.25rem;
         border-radius: 5px;
-        width: 76%;
-        height: 25px;
+        width: 100%;
+        height: 50px;
     }
 
-    .footer {
-        margin:10% 0%;
-    }
 }
 
 @media only screen and (min-device-width:1024px) {
-    .container{
+    .container {
         margin: 5% 10%;
     }
-    
-    .header{
+
+    /* .header {
         display: flex;
         justify-content: space-between;
         flex-wrap: nowrap;
@@ -210,7 +193,7 @@ a{
         width: 15%;
     }
 
-    .home{
+    .home {
         display: inline;
         color: #505050;
     }
@@ -224,8 +207,8 @@ a{
         justify-content: space-between;
     }
 
-    .userName{
-        color:#505050;
+    .userName {
+        color: #505050;
         font-weight: bolder;
     }
 
@@ -235,7 +218,7 @@ a{
 
     .hamburgermenu {
         display: none
-    }
+    } */
 
     .commentBody {
         margin: 10% 26%;
@@ -253,17 +236,13 @@ a{
 
     .comment {
         width: 100%;
+        box-sizing: border-box;
         height: 200px;
         vertical-align: text-top;
         margin-bottom: 20px;
         resize: none;
         background-color: #F5F5F5;
         border-color: #F5F5F5;
-    }
-
-    .comment::-webkit-input-placeholder,
-    .comment::placeholder {
-        color: #C0C0C0;
         padding: 10px;
         font-size: 1.5rem;
         font-family: 'Times New Roman', Times, serif;
@@ -271,13 +250,10 @@ a{
         word-wrap: break-word;
     }
 
+    .comment::-webkit-input-placeholder,
+    .comment::placeholder,
     :-ms-input-placeholder {
         color: #C0C0C0;
-        padding: 10px;
-        font-size: 1.125rem;
-        font-family: 'Times New Roman', Times, serif;
-        white-space: pre-wrap;
-        word-wrap: break-word;
     }
 
     .postComment {
@@ -288,13 +264,8 @@ a{
         color: white;
         font-size: 1.5rem;
         border-radius: 5px;
-        width: 101%;
+        width: 100%;
         height: 50px;
         margin: 2% 0%;
-    }
-
-    .footer{
-        padding:0;
-        margin:0%;
     }
 }

@@ -17,7 +17,7 @@ export async function headerInitialization() {
         document.body.querySelector(".userName").textContent = userName;
     }
 
-    console.log(loggedState);
+    // console.log(loggedState);
 
     document.body.querySelector(".logout").addEventListener("click", (event) => {
         fetch("/api/logout").then((result) => {
@@ -28,7 +28,10 @@ export async function headerInitialization() {
 
     if (window.innerWidth >= 1024) {
         logged(loggedState);
-    } 
+    }else{
+        document.body.querySelector(".loggedIn").style.display = "none";
+        document.body.querySelector(".loggedOut").style.display = "none";
+    }
     
     let hamburgermenu = document.body.querySelector('.hamburger');
     let crossSign = document.body.querySelector('.crossSign');

@@ -73,7 +73,7 @@ a {
         grid-row: 1/2;
         display: flex;
         justify-content: end;
-        padding: 5%;
+        padding: 3%;
         margin-left: auto;
         background-color: #F5F5F5;
     }

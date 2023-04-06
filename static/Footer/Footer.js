@@ -10,10 +10,7 @@ footerTemplate.innerHTML =
 class Footer extends HTMLElement {
     constructor() {
         super();
-    }
-    connectedCallback() {
-        const shadowRoot = this.attachShadow({ mode: "open" });
-        shadowRoot.appendChild(footerTemplate.cloneNode(true));
+        this.appendChild(footerTemplate.cloneNode(true));
     }
 }
 

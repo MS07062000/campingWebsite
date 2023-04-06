@@ -14,7 +14,7 @@ a {
 
 @media only screen and (min-device-width: 320px) {
     .container {
-        margin: 10% 5%;
+        margin: 7% 5%;
     }
 
     /* .header {
@@ -93,9 +93,24 @@ a {
     }
 
     .campgroundName,
-    .price,
+    .price{
+        box-sizing: border-box;
+        width: 100%;
+        height: 43px;
+        margin: 2% 0%;
+        resize: none;
+        background-color: #F5F5F5;
+        border-color: #F5F5F5;
+        padding: 10px;
+        font-size: 1.1rem;
+        font-family: 'Times New Roman', Times, serif;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
+
     .imageLink {
-        width: 98%;
+        box-sizing: border-box;
+        width: 100%;
         height: 42px;
         margin: 2% 0%;
         resize: none;
@@ -115,19 +130,20 @@ a {
     .imageLink::placeholder,
     .imageLink::-webkit-input-placeholder,
     .description::placeholder,
-    .description::-webkit-input-placeholder{
+    .description::-webkit-input-placeholder {
         color: #A9A9A9;
 
     }
 
     .description {
-        width: 98%;
-        height: 220px;
+        box-sizing: border-box;
+        width: 100%;
+        height: 189px;
         margin: 2% 0%;
         resize: none;
         background-color: #F5F5F5;
         border-color: #F5F5F5;
-        padding: 10px; 
+        padding: 10px;
         font-size: 1.1rem;
         font-family: 'Times New Roman', Times, serif;
         white-space: pre-wrap;
@@ -144,10 +160,6 @@ a {
         display: flex;
         align-items: center;
         justify-content: center;
-    }
-
-    .footer {
-        margin: 70px 0px;
     }
 }
 
@@ -233,9 +245,10 @@ a {
     }
 
     .campgroundName,
-    .price{
+    .price {
+        box-sizing: border-box;
         width: 100%;
-        height: 10vh;
+        height: 43px;
         margin: 2% 0%;
         resize: none;
         background-color: #F5F5F5;
@@ -248,8 +261,9 @@ a {
     }
 
     .imageLink {
-        width: 105%;
-        height: 18vh;
+        box-sizing: border-box;
+        width: 100%;
+        height: 43px;
         margin: 2% 0%;
         resize: none;
         background-color: #F5F5F5;
@@ -268,13 +282,14 @@ a {
     .imageLink::placeholder,
     .imageLink::-webkit-input-placeholder,
     .description::placeholder,
-    .description::-webkit-input-placeholder  {
+    .description::-webkit-input-placeholder {
         color: #A9A9A9;
     }
 
     .description {
+        box-sizing: border-box;
         width: 100%;
-        height: 45vh;
+        height: 130px;
         margin: 2% 0%;
         resize: none;
         background-color: #F5F5F5;
@@ -292,17 +307,13 @@ a {
         color: white;
         font-size: 1.15rem;
         border-radius: 5px;
-        width: 101%;
-        height: 15vh;
+        width: 100%;
+        height: 50px;
         display: flex;
         flex-wrap: nowrap;
         align-items: center;
         justify-content: center;
         margin-top: 2%;
-    }
-
-    .footer {
-        margin: 10% 0%;
     }
 }
 
@@ -374,9 +385,9 @@ a {
     }
 
     .campgroundName,
-    .price{
+    .price {
         width: 100%;
-        height: 30px;
+        height: 60px;
         margin: 2% 0%;
         resize: none;
         background-color: #F5F5F5;
@@ -389,7 +400,8 @@ a {
     }
 
     .imageLink {
-        width: 105%;
+        width: 100%;
+        box-sizing: border-box;
         height: 60px;
         margin: 2% 0%;
         resize: none;
@@ -407,7 +419,7 @@ a {
     .price::placeholder,
     .price::-webkit-input-placeholder,
     .imageLink::placeholder,
-    .imageLink::-webkit-input-placeholder, 
+    .imageLink::-webkit-input-placeholder,
     .description::placeholder,
     .description::-webkit-input-placeholder {
         color: #A9A9A9;
@@ -415,7 +427,7 @@ a {
 
     .description {
         width: 100%;
-        height: 200px;
+        height: 260px;
         margin: 2% 0%;
         resize: none;
         background-color: #F5F5F5;

@@ -52,6 +52,7 @@ class Modal extends HTMLElement {
     closeModal(){
         document.body.querySelector("my-modal").style.display = "none";
         document.body.style.overflow="auto";
+        document.body.style.height="auto";
         if(modalRedirectURL!==undefined){
             location.href=modalRedirectURL;
         }
