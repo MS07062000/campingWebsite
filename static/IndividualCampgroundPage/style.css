@@ -11,7 +11,7 @@ a{
     text-decoration: none;
 }
 
-@media only screen and (min-device-width:320px) {
+/* @media only screen and (min-device-width:320px) {
     .container {
         margin: 2%;
         font-size: 18px;
@@ -151,9 +151,6 @@ a{
         border-radius: 5%;
     }
 
-    /* .footer {
-        margin: 5% 0%;
-    } */
 }
 
 @media only screen and (min-device-width:768px) {
@@ -297,10 +294,7 @@ a{
         border-radius: 5%;
     }
 
-    /* .footer {
-        margin: 5% 0%;
-    } */
-}
+} */
 
 @media only screen and (min-device-width:1024px) {
     .container {
@@ -346,47 +340,60 @@ a{
     }
 
     .mainBody {
-        display: flex;
+        /* display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
         align-items: flex-start;
-        justify-content: space-between;
+        justify-content: space-between; */
+        display: grid;
+        grid-template-columns: 40% 60%;
     }
 
     .mapImage {
-        flex: 4;
+        flex: 5;
         border-style: solid;
         padding: 50px;
         margin-right: 5%;
     }
 
     .map {
+        /* flex: 5;
         width: 100%;
-        height: 100%;
+        height: 100%; */
+        grid-column: 1/2;
+        width: 80%;
+        padding: 8%;
+        height: 500px;
+        border: solid;
     }
 
     .campDescriptionAndComment {
-        flex: 12;
+        grid-column: 2/2;
+        display: grid;
+        grid-template-rows:65% 35% ;
+        /* flex: 12;
         display: flex;
         flex-direction: column;
         flex-wrap: nowrap;
-        align-items: stretch;
+        align-items: stretch; */
     }
 
     .campImageWithDescription {
+        grid-row: 1/2;
         border-style: solid;
-        padding: 50px;
+        padding: 6%;
         margin-bottom: 5%;
     }
 
     .campImage {
         width: 100%;
-        height: 100%;
+        height: 50%;
     }
+
 
     .campName {
         font-weight: bold;
-        font-size: 1.6rem;
+        font-size: 1.3rem;
     }
 
     .price {
@@ -396,9 +403,12 @@ a{
     }
 
     .campgroundInformation {
-        margin: 3% 0%;
+        margin-block: 0.5rem;
         color: gray;
-        font-size: 1.25rem;
+        font-size: 1.2rem;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
     }
 
     .campgroundDefinedByUser {
@@ -408,13 +418,14 @@ a{
 
 
     .campComments {
+        grid-row: 2/2;
         border-style: solid;
-        padding: 50px;
+        padding: 6%;
     }
 
     .commentZone {
         overflow-y: scroll;
-        height: 40vh;
+        height: 70%;
     }
 
     .commentZone::-webkit-scrollbar {

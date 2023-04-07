@@ -9,7 +9,7 @@ async function getCampInfo(campName){
     
     
     //remaining to add is map info keep in mind
-
+    document.body.querySelector("iframe").setAttribute("src",`https://maps.google.com/maps?q=${campName}&t=&z=13&ie=UTF8&iwloc=&output=embed`);
     document.body.querySelector(".campImage").setAttribute("src",campDetails["image"]);
     document.body.querySelector(".campName").textContent=campDetails["campgroundName"];
     document.body.querySelector(".price").textContent=campDetails["price"];
