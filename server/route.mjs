@@ -15,36 +15,23 @@ import fsPromises from "fs/promises";
 const app = express();
 const port = 3000;
 
-app.use('/static', express.static('static'));
-app.use('/Assets', express.static('Assets'));
-// app.get("/campground/:campName",async(req,res)=>{
-//     res.send(await fsPromises.readFile("./static/IndividualCampgroundPage/individualcampground.html")).status(200);
-//     // req.params.campName;
-// });
-app.use("/campground/:campName", express.static('./static/IndividualCampgroundPage/individualcampground.html'));
-app.use("/",express.static('./static/LandingPage/landing.html'));
-app.use("/signIn",express.static("./static/SignIn/signin.html"));
-app.use("/signUp",express.static("./static/SignUp/signup.html"));
-app.use("/search",express.static("./static/SearchPage/search.html"));
-app.use("/addCampground",express.static("./static/AddNewCampground/addNewCampground.html"));
-app.use("/addComment/:campName",express.static("./static/AddNewComment/addNewComment.html"));
-
-
-
-
-
-
-//--------------------------------------------------------------------------------------------------
-
-
-
-
 app.use(bodyParser.json({ limit: '5mb' }));
 app.use(cookieParser("1234"));
 
 await connect();
 await createCollection();
 
+
+//--------------------------------------------------------------------------------------------------
+//unauthenticated routes
+app.use('/static', express.static('static'));
+app.use('/Assets', express.static('Assets'));
+app.use("/",express.static('./static/LandingPage/landing.html'));
+app.use("/signIn",express.static("./static/SignIn/signin.html"));
+app.use("/signUp",express.static("./static/SignUp/signup.html"));
+app.use("/search",express.static("./static/SearchPage/search.html"));
+
+//authenticated routes
 const authenticate = async (req, res, next) => {
     console.log("Cookie: " + JSON.stringify(req.signedCookies));
     if (req.signedCookies == undefined) {
@@ -55,9 +42,21 @@ const authenticate = async (req, res, next) => {
         let authresult = await validateSession(req.signedCookies["access-token"]);
         next();
     } catch (err) {
-        res.sendStatus(403);
+        res.redirect("/signUp")
+        // res.sendStatus(403);
     }
 };
+
+
+app.use("/campground/:campName",authenticate,express.static('./static/IndividualCampgroundPage/individualcampground.html'));
+app.use("/addCampground",authenticate,express.static("./static/AddNewCampground/addNewCampground.html"));
+app.use("/addComment/:campName",authenticate,express.static("./static/AddNewComment/addNewComment.html"));
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------
 
 app.post('/api/signIn', async (req, res) => {
     console.log("Body:" + JSON.stringify(req.body));

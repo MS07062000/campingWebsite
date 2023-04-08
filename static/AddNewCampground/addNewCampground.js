@@ -39,8 +39,14 @@ function addCampground() {
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
         form.querySelector("button").disabled = true;
+        document.querySelector("my-spinner").style.display = "block";
         let campImage;
-        if (imageUploadType == "uploadImage") {
+        if(imageUploadType==undefined){
+            document.querySelector("my-spinner").style.display = "none";
+            document.querySelector("my-modal").setAttribute("error-message","Please select Image option");
+            document.querySelector("my-modal").style.display="block";
+            return;
+        }else if (imageUploadType == "uploadImage") {
             campImage = await base64(form.querySelector('[name=uploadImage]').files[0]);
         } else {
             campImage = form.querySelector('[name=uploadURL]').value;
@@ -64,11 +70,13 @@ function addCampground() {
             document.querySelector("my-modal").setAttribute("correct-message", "Thank you for submitting the information about the new camp. We appreciate your contribution to our community. Our team will review the details and add the camp to our directory within the next seven days. Thank you for your patience and for helping us make our platform more comprehensive.");
             document.querySelector("my-modal").style.display = "block";
             console.log(result);
+            modalRedirectURL="/search"
         }).catch((err) => {
             document.querySelector("my-spinner").style.display = "none";
             document.querySelector("my-modal").setAttribute("error-message", "We're sorry, but we encountered an error and couldn't add your feedback at this time. Please try again later or contact our support team for assistance.");
             document.querySelector("my-modal").style.display = "block";
             console.log(err);
+            modalRedirectURL="/search"
         });
         form.querySelector("button").disabled = false;
     });
