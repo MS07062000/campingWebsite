@@ -13,7 +13,7 @@ a {
 
 @media only screen and (min-device-width:320px) {
     .container {
-        margin: 7% 5%;
+        margin: 7%;
     }
 
     /* .header {
@@ -172,7 +172,7 @@ a {
 
 @media only screen and (min-device-width:1024px) {
     .container {
-        margin: 5% 10%;
+        margin: 5% 7%;
     }
 
     /* .header {

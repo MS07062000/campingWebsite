@@ -12,7 +12,10 @@ async function getCampInfo(campName){
     document.body.querySelector("iframe").setAttribute("src",`https://maps.google.com/maps?q=${campName}&t=&z=13&ie=UTF8&iwloc=&output=embed`);
     document.body.querySelector(".campImage").setAttribute("src",campDetails["image"]);
     document.body.querySelector(".campName").textContent=campDetails["campgroundName"];
-    document.body.querySelector(".price").textContent=campDetails["price"];
+    let price = document.createElement("span");
+    price.setAttribute("class","price");
+    price.textContent = campDetails["price"];
+    document.body.querySelector(".campName").appendChild(price);
     document.body.querySelector(".campgroundInformation").textContent=campDetails["description"];
     document.body.querySelector(".campgroundDefinedByUser").textContent="Submitted by "+campDetails["submittedBy"];
     campComments.forEach((commentByUserInfo) => {

@@ -47,7 +47,7 @@ function addCampground() {
         }
         let campgroundInfo = {
             "campgroundName": form.querySelector('.campgroundName').value,
-            "price": form.querySelector('.price').value,
+            "price": form.querySelector('.price').value+"/night",
             "image": campImage,
             "description": form.querySelector('.description').value,
             "submittedBy":document.body.querySelector(".userName").textContent,
