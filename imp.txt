@@ -1,2 +1,0 @@
-header.js check for some doubts
-https://www.npmjs.com/package/currency-library

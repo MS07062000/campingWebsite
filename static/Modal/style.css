@@ -39,11 +39,10 @@ my-modal {
     flex-direction: column;
     flex-wrap: nowrap;
     animation-name: popupFromBottom;
-    animation-duration: 1s;
+    animation-duration: 0.1s;
     animation-fill-mode: forwards;
     animation-iteration-count: 1;
     animation-delay: 0s;
-    border:solid;
     background-color: white;
 }
 
@@ -51,7 +50,6 @@ my-modal {
     margin-left: auto;
     background-color: black;
     color: white;
-    width: 2%;
     font-size: 2rem;
 }
 
@@ -61,6 +59,7 @@ my-modal {
     width: 35%;
     padding: 5px;
     font-size: 2rem;
+    margin-bottom:2%
 }
 
 .correctSign {
@@ -73,6 +72,10 @@ my-modal {
     margin-top: 7%;
 }
 
+.message{
+    margin: 5% 10%;
+    font-size: 1.2rem;
+}
 @keyframes popupFromBottom {
     0% {
         transform: translate(-50%,150%);

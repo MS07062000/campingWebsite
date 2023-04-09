@@ -15,12 +15,11 @@ document.querySelector('[name="signUpForm"]').addEventListener("submit", (e) => 
       method: "POST",
       body: JSON.stringify({ "userName": userName, "password": password }),
       headers: { "Content-Type": "application/json" }
-   })
-      .then((result) => {
-         console.log(result);
-      }).catch((err) => {
-         console.log(err);
-      });
+   }).then((result) => {
+      console.log(result);
+   }).catch((err) => {
+      console.log(err);
+   });
 
 
 });

@@ -25,13 +25,14 @@ function addCampground() {
                 name: "uploadURL",
                 placeholder: "www.thepinoytraveler.com/2018/01/mt-ulap-diy-dayhike.html"
             };
-            imageOptions.after(imageInput);
+            // imageOptions.after(imageInput);
         }
 
         Object.keys(property).forEach((key) => {
             imageInput.setAttribute(key, property[key]);
         });
 
+        imageInput.required="true";
         imageOptions.after(imageInput);
     });
 
