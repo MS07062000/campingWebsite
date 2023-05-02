@@ -140,3 +140,5 @@ export async function getAllCampground () {
 export async function add () {
   await db.collection('campgrounds').insertOne();
 }
+
+// export async function getCampgroundNames (searchValue) { }

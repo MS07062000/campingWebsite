@@ -1,0 +1,10 @@
+header.js check for some doubts
+
+
+https://www.npmjs.com/package/currency-library
+Can a developer use multiple framework as and when require in single project?
+How to use ESLINT for js files present in static folders because all the configurations are done in server folder?
+forget password and adding email id also while signup
+limiting user attempt to crack password
+with help of drawing board teach me transform 
+REMOVED DOCKER,C,ASSEMBLY LANGUAGE FROM RESUME

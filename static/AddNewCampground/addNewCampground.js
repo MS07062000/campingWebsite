@@ -15,7 +15,7 @@ function addCampground() {
                 type: "file",
                 accept: "image/*",
                 placeholder: "Choose Image to upload"
-            }
+            };
         }
 
         if (event.target.value == "uploadURL") {
@@ -71,13 +71,13 @@ function addCampground() {
             document.querySelector("my-modal").setAttribute("correct-message", "Thank you for submitting the information about the new camp. We appreciate your contribution to our community. Our team will review the details and add the camp to our directory within the next seven days. Thank you for your patience and for helping us make our platform more comprehensive.");
             document.querySelector("my-modal").style.display = "block";
             console.log(result);
-            modalRedirectURL="/search"
+            modalRedirectURL="/search";
         }).catch((err) => {
             document.querySelector("my-spinner").style.display = "none";
             document.querySelector("my-modal").setAttribute("error-message", "We're sorry, but we encountered an error and couldn't add your feedback at this time. Please try again later or contact our support team for assistance.");
             document.querySelector("my-modal").style.display = "block";
             console.log(err);
-            modalRedirectURL="/search"
+            modalRedirectURL="/search";
         });
         form.querySelector("button").disabled = false;
     });
@@ -92,7 +92,7 @@ function base64(file) {
         };
 
         // Convert data to base64 
-        reader.readAsDataURL(file)
+        reader.readAsDataURL(file);
     });
 }
 
