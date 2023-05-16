@@ -1,8 +1,9 @@
 import { MongoClient } from 'mongodb';
+import dotenv from 'dotenv';
+dotenv.config();
 // Connection URI
 const uri =
-  'mongodb://user123:99605510-a7c8-11ed-8134-028b791895a5@127.0.0.1:27017/test';
-
+  `mongodb://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_HOST}:${process.env.MONGODB_PORT}/${process.env.MONGODB_DATABASE}`;
 // Create a new MongoClient
 const client = new MongoClient(uri);
 export let db;

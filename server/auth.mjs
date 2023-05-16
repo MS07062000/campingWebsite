@@ -33,3 +33,21 @@ export async function tokenGeneration (payload, sessionId) {
   const jwtSignFunction = promisify(jwt.sign);
   return jwtSignFunction(payload, sessionId, { expiresIn: Date.now() + (1000 * 60 * 60) });
 }
+
+export async function emailVerificationTokenGeneration (payload) {
+  const jwtSignFunction = promisify(jwt.sign);
+  return jwtSignFunction(payload, { expiresIn: Date.now() + (24 * 60 * 60) });
+}
+
+export async function verifyTokenFromEmail (token) {
+  return new Promise((resolve, reject) => {
+    jwt.verify(token, (err, decoded) => {
+      if (err) {
+        reject(err);
+      }
+      if (token) {
+        resolve(decoded);
+      }
+    });
+  });
+}

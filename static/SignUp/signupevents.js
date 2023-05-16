@@ -7,13 +7,15 @@ document.querySelector('[name="signUpForm"]').addEventListener("submit", (e) => 
    //stop spinner
    //enable button not rquired for multipage
    let form = document.querySelector('[name="signUpForm"]');
+   let email = form.querySelector("[name='email']").value;
    let userName = form.querySelector("[name='username']").value;
    let password = form.querySelector("[name='password']").value;
    form.querySelector('button').disabled = true;
+
    console.log(userName + " " + password);
    fetch("http://127.0.0.1:3000/api/signUp", {
       method: "POST",
-      body: JSON.stringify({ "userName": userName, "password": password }),
+      body: JSON.stringify({ "email":email, "userName": userName, "password": password }),
       headers: { "Content-Type": "application/json" }
    }).then((result) => {
       console.log(result);
@@ -23,14 +25,3 @@ document.querySelector('[name="signUpForm"]').addEventListener("submit", (e) => 
 
 
 });
-
-
-function validateEmail(email) {
-
-  var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-
-  if (!email.value.match(validRegex)) {
-
-  }
-
-}

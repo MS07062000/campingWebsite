@@ -11,13 +11,14 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-import { addCampground, addComment, signUp, signIn, connect, createCollection, getAllCampground, validateSession, logOut, getCampgroundInfo, getCommentForCampground } from './main.mjs';
+import { addCampground, addComment, signUp, signIn, connect, createCollection, getAllCampground, validateSession, logOut, getCampgroundInfo, getCommentForCampground, verifyLinkSendInGmailOfUser } from './main.mjs';
+import { emailVerificationTokenGeneration } from './auth.mjs';
 
 const app = express();
 const port = 3000;
 
 app.use(bodyParser.json({ limit: '5mb' }));
-app.use(cookieParser('1234'));
+app.use(cookieParser(process.env.COOKIE_SECRET));
 
 await connect();
 await createCollection();
@@ -62,6 +63,20 @@ app.post('/api/signIn', async (req, res) => {
 app.post('/api/signUp', async (req, res, next) => {
   console.log('Body:' + JSON.stringify(req.body));
   await signUp(req.body, res);
+});
+
+app.get('/api/verify/:userName/:verificationToken', async (req, res, next) => {
+  console.log('Username: ' + req.params.userName);
+  console.log('Token: ' + req.params.verificationToken);
+  await verifyLinkSendInGmailOfUser(req.params.userName, req.params.verificationToken).then((response) => {
+    if(response){
+      //pass username and password for signin directly so that homepage gets open
+      signIn(userName,res);
+    } else {
+      // create a html file which tells user that verification link expires regenerate 
+      // button rakho aur fir user click kiya toh link regenerate karo
+    }
+  });
 });
 
 app.get('/api/userName', (req, res) => {

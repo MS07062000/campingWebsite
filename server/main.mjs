@@ -2,7 +2,7 @@
 /* eslint-disable quote-props */
 
 import { connectToDatabase, db } from '../server/mongodb.mjs';
-import { checkPassword, setPassword, tokenGeneration, validatingToken } from './auth.mjs';
+import { checkPassword, emailVerificationTokenGeneration, setPassword, tokenGeneration, validatingToken, verifyTokenFromEmail } from './auth.mjs';
 
 export async function connect () {
   await connectToDatabase();
@@ -39,23 +39,65 @@ async function getUserNameIfExists (userName) {
   return result;
 }
 
+async function getUserMailIDIfExists (email) {
+  const result = await db.collection('userCredentials').findOne({ 'email': email });
+  console.log('Result' + JSON.stringify(result));
+  return result;
+}
+// async function emailVerification(){}
+
 export async function signUp (userInfo, response) {
-  if (await getUserNameIfExists(userInfo.userName) === null) { // checkinguserExistsORNot
+  if (await getUserMailIDIfExists(userInfo.email) === null) { // checkinguserExistsORNot
     const password = await setPassword(userInfo.password);
     // console.log(password);
 
     const userId = (await db.collection('user').insertOne({})).insertedId;
     console.log(JSON.stringify(userId));
+    const payloadForEmailVerification = {
+      'email': userInfo.email,
+      'userName': userInfo.userName
+    };
 
-    const doc = { 'userName': userInfo.userName, 'password': password, 'userId': userId };
+    const doc = {
+      'email': userInfo.email,
+      'userName': userInfo.userName,
+      'password': password,
+      'userId': userId,
+      'verified': false,
+      'token': emailVerificationTokenGeneration(payloadForEmailVerification),
+      'time': new Date().getTime()
+    };
 
     // inserting new user
     await db.collection('userCredentials').insertOne(doc);
+
+
+
+
     return signIn(userInfo, response);
   } else {
-    console.log('Error in checking username');
+    console.log('Error in checking email');
   }
 }
+
+
+// export async function signUp (userInfo, response) {
+//   if (await getUserNameIfExists(userInfo.userName) === null) { // checkinguserExistsORNot
+//     const password = await setPassword(userInfo.password);
+//     // console.log(password);
+
+//     const userId = (await db.collection('user').insertOne({})).insertedId;
+//     console.log(JSON.stringify(userId));
+
+//     const doc = { 'userName': userInfo.userName, 'password': password, 'userId': userId };
+
+//     // inserting new user
+//     await db.collection('userCredentials').insertOne(doc);
+//     return signIn(userInfo, response);
+//   } else {
+//     console.log('Error in checking username');
+//   }
+// }
 
 async function getHashIfExists (userName) {
   const result = await db.collection('userCredentials').findOne({ 'userName': userName });
@@ -100,6 +142,26 @@ async function storeSessionToken (userInfo, response) {
     signed: true
   }).sendStatus(200);
   console.log('Successfully added token in session');
+}
+
+export async function verifyLinkSendInGmailOfUser (userName, token) {
+  const result = await db.collection('userCredentials').find({ 'userName': userName, 'token': token });
+  let tokenValid = false;
+  await verifyTokenFromEmail(token).then((response, error) => {
+    if (response) {
+      tokenValid = true;
+    }
+    if (error) {
+      tokenValid = false;
+    }
+  });
+
+  if (!result.verified && tokenValid) {
+    await db.collection('userCredentials').updateOne({ 'userName': userName, 'token': token }, { $set: { 'verified': true } });
+    return true;
+  } else {
+    return false;
+  }
 }
 
 export async function logOut (request, response) {
