@@ -37,7 +37,7 @@ export function sendMailToUser (mailDetails) {
 }
 
 export function sendLinkForEmailVerification (mailReciever, userName, validatingToken) {
-  const linkForVerification = `http://127.0.0.1:3000/api/${userName}/${validatingToken}`;
+  const linkForVerification = `http://127.0.0.1:3000/api/verify/${userName}/${validatingToken}`;
   const mailBody = composeEmail(userName, linkForVerification);
   const mailSubject = 'Confirm Your Account';
   const mailInformation = mailDetails(mailReciever, mailSubject, mailBody);

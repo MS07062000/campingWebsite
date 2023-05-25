@@ -70,8 +70,7 @@ app.get('/api/verify/:userName/:verificationToken', async (req, res, next) => {
   console.log('Token: ' + req.params.verificationToken);
   await verifyLinkSendInGmailOfUser(req.params.userName, req.params.verificationToken).then((response) => {
     if(response){
-      //pass username and password for signin directly so that homepage gets open
-      signIn(userName,res);
+      
     } else {
       // create a html file which tells user that verification link expires regenerate 
       // button rakho aur fir user click kiya toh link regenerate karo

@@ -9,6 +9,7 @@
     "image-thumbnail": "^1.0.15",
     "jsonwebtoken": "^9.0.0",
     "mongodb": "^5.0.1",
+    "node-cron": "^3.0.2",
     "nodemailer": "^6.9.1"
   },
   "devDependencies": {

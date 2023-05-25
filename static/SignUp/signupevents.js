@@ -10,6 +10,7 @@ document.querySelector('[name="signUpForm"]').addEventListener("submit", (e) => 
    let email = form.querySelector("[name='email']").value;
    let userName = form.querySelector("[name='username']").value;
    let password = form.querySelector("[name='password']").value;
+   let snackBar = document.querySelector("custom-snackbar");
    form.querySelector('button').disabled = true;
 
    console.log(userName + " " + password);
@@ -17,8 +18,12 @@ document.querySelector('[name="signUpForm"]').addEventListener("submit", (e) => 
       method: "POST",
       body: JSON.stringify({ "email":email, "userName": userName, "password": password }),
       headers: { "Content-Type": "application/json" }
-   }).then((result) => {
-      console.log(result);
+   }).then((response) => {
+      console.log(response);
+      if(response.status==409){
+         console.log(response.body);
+         snackBar.setAttribute("message",response.body);
+      }
    }).catch((err) => {
       console.log(err);
    });

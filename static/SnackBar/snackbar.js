@@ -26,4 +26,4 @@ class SnackBar extends HTMLElement {
     }
 }
 
-window.customElements.define("my-snackbar", SnackBar);
+window.customElements.define("custom-snackbar", SnackBar);

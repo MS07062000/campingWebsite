@@ -65,21 +65,16 @@ export async function signUp (userInfo, response) {
       'userId': userId,
       'verified': false,
       'token': emailVerificationTokenGeneration(payloadForEmailVerification),
-      'time': new Date().getTime()
+      'creation Time': new Date().getTime()
     };
 
     // inserting new user
     await db.collection('userCredentials').insertOne(doc);
-
-
-
-
     return signIn(userInfo, response);
   } else {
-    console.log('Error in checking email');
+    response.status(409).send('Email already exists. Please use a different email address.');
   }
 }
-
 
 // export async function signUp (userInfo, response) {
 //   if (await getUserNameIfExists(userInfo.userName) === null) { // checkinguserExistsORNot
@@ -99,18 +94,23 @@ export async function signUp (userInfo, response) {
 //   }
 // }
 
-async function getHashIfExists (userName) {
+async function getUserDetailsIfUserNameExists (userName) {
   const result = await db.collection('userCredentials').findOne({ 'userName': userName });
   console.log('Result' + JSON.stringify(result));
   return result;
 }
 
+async function getUserDetailsIfEmailExists (email) {
+  const result = await db.collection('userCredentials').findOne({ 'email': email });
+  console.log('Result' + JSON.stringify(result));
+  return result;
+}
+
 export async function signIn (userInfo, response) {
-  const hash = (await getHashIfExists(userInfo.userName)).password;
-  if (hash === null) {
-    // userName doesn't exists
-    console.log('Invalid UserName and Password');
-  } else {
+  const fetchedUserInfo = await getUserDetailsIfEmailExists(userInfo.email);
+  const hash = (await fetchedUserInfo).password;
+  const verificationStatus = (await fetchedUserInfo).verified;
+  if (hash !== null) {
     const result = await checkPassword(userInfo.password, hash);
     if (result) {
       // redirect to home page
@@ -118,8 +118,16 @@ export async function signIn (userInfo, response) {
       return storeSessionToken(userInfo, response);
     } else {
       // password wrong
-      console.log('Invalid UserName and Password');
+      console.log('Invalid Email and Password');
     }
+  } else {
+    console.log('Something went wrong. Please try again');
+  }
+  
+  if (!verificationStatus) {
+// tell them to verify
+  } else {
+    
   }
 }
 
@@ -163,6 +171,7 @@ export async function verifyLinkSendInGmailOfUser (userName, token) {
     return false;
   }
 }
+
 
 export async function logOut (request, response) {
   await db.collection('session').findOneAndDelete({ 'token': request.signedCookies['access-token'] });

@@ -1,0 +1,134 @@
+:root {
+    font-size: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+@media only screen and (min-device-width: 320px) {
+    .container {
+        margin: 5% 7%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+    }
+
+    .messageContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .title {
+        font-size: 1.5rem;
+        font-weight: 900;
+        margin-block: 2%;
+    }
+
+    .message {
+        margin-block: 7%;
+        font-size: 1.1rem;
+    }
+
+    .button {
+        color: black;
+        background-color: #03C04A;
+        font-size: 1.1rem;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        width: 6rem;
+    }
+}
+
+@media only screen and (min-device-width: 768px) {
+    .container {
+        margin: 5% 7%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+    }
+
+    .messageContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .title {
+        font-size: 1.5rem;
+        font-weight: 900;
+        margin-block: 0%;
+    }
+
+    .message {
+        margin-block: 5%;
+        font-size: 1.1rem;
+    }
+
+    .button {
+        color: black;
+        background-color: #03C04A;
+        font-size: 1.1rem;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        width: 6rem;
+    }
+}
+
+@media only screen and (min-device-width: 1024px) {
+    .container {
+        margin: 5% 7%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+    }
+
+    .messageContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .title {
+        font-size: 2rem;
+        font-weight: 900;
+        margin-block: 0%;
+    }
+
+    .message {
+        margin-block: 2%;
+        font-size: 1.2rem;
+    }
+
+    .button {
+        color: black;
+        background-color: #03C04A;
+        font-size: 1.2rem;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        width: 6rem;
+    }
+}
+
+
+/* .hide {
+    display: none;
+} */
