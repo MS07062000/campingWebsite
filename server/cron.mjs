@@ -10,7 +10,7 @@ export async function cleanupExpiredVerificationDataForUser () {
         $expr: {
           $gt: [
             {
-              $subtract: ['$createdTime', currentTime]
+              $subtract: ['$creationTime', currentTime]
             },
             24 * 60 * 60 * 1000// 24 hours in milliseconds
           ]

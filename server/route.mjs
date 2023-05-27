@@ -7,12 +7,12 @@
 // const express = require('express');
 // const path=require('path');
 // const bodyParser = require('body-parser');
-// const { authentication, connect, createCollection } = require('./main.mjs');
+// const { authentication, connect, createCollection } = require('./campgroundUtils.mjs');
 import express from 'express';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-import { addCampground, addComment, signUp, signIn, connect, createCollection, getAllCampground, validateSession, logOut, getCampgroundInfo, getCommentForCampground, verifyLinkSendInGmailOfUser } from './main.mjs';
-import { emailVerificationTokenGeneration } from './auth.mjs';
+import { addCampground, addComment, createCollection, getAllCampground, getCampgroundInfo, getCommentForCampground } from './campgroundUtils.mjs';
+import { connect, signUp, signIn, validateSession, logOut, verifyLinkSendInGmailOfUser } from './userauth.mjs';
 
 const app = express();
 const port = 3000;
@@ -31,6 +31,7 @@ app.use('/', express.static('./static/LandingPage/landing.html'));
 app.use('/signIn', express.static('./static/SignIn/signin.html'));
 app.use('/signUp', express.static('./static/SignUp/signup.html'));
 app.use('/search', express.static('./static/SearchPage/search.html'));
+app.use('/confirmation', express.static('./static/MailVerificationResponse/mailVerificationResponse.html'));
 
 // authenticated routes
 const authenticate = async (req, res, next) => {
@@ -69,11 +70,8 @@ app.get('/api/verify/:userName/:verificationToken', async (req, res, next) => {
   console.log('Username: ' + req.params.userName);
   console.log('Token: ' + req.params.verificationToken);
   await verifyLinkSendInGmailOfUser(req.params.userName, req.params.verificationToken).then((response) => {
-    if(response){
-      
-    } else {
-      // create a html file which tells user that verification link expires regenerate 
-      // button rakho aur fir user click kiya toh link regenerate karo
+    if (response) {
+      res.redirect(`/confirmation/:${response}`);// checkout
     }
   });
 });
