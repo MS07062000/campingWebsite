@@ -32,6 +32,7 @@ export async function signUp (userInfo, response) {
           if (verificationStatus) {
             signIn(userInfo, response);
             clearInterval(checkEmailVerified);
+            // redirect will automatically clear Interval
           }
         } catch (error) {
           console.error(error);
