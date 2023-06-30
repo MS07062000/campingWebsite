@@ -16,22 +16,31 @@ export async function headerInitialization() {
         loggedState = true;
         document.body.querySelector(".userName").textContent = userName;
     }
-
+    if (window.innerWidth >= 1024) {
+        logged(loggedState);
+    }
     // console.log(loggedState);
 
     document.body.querySelector(".logout").addEventListener("click", (event) => {
         fetch("/api/logout").then((result) => {
-            console.log(result);
-            changeWindowLocation();
+            if(result.status==200){
+                changeWindowLocation();
+            }
         });
     });
 
-    if (window.innerWidth >= 1024) {
-        logged(loggedState);
-    }else{
-        document.body.querySelector(".loggedIn").style.display = "none";
-        document.body.querySelector(".loggedOut").style.display = "none";
-    }
+    window.addEventListener('resize',(event)=>{
+        if (window.innerWidth >= 1024) {
+            document.body.querySelector(".hamburgermenu").style.display = "none";
+            logged(loggedState);
+        }else{
+            document.body.querySelector(".loggedIn").style.display = "none";
+            document.body.querySelector(".loggedOut").style.display = "none";
+            document.body.querySelector(".hamburgermenu").style.display = "flex";
+        }
+    });
+
+    
     
     let hamburgermenu = document.body.querySelector('.hamburger');
     let crossSign = document.body.querySelector('.crossSign');
@@ -39,7 +48,6 @@ export async function headerInitialization() {
         hamburgermenu.style.display = "none";
         crossSign.style.display = "block";
         logged(loggedState);
-      
     });
 
     crossSign.addEventListener('click', (event) => {
@@ -63,15 +71,12 @@ function logged(loggedState){
 
 function changeWindowLocation() {
     let currentLocation = window.location.pathname;
-    console.log(currentLocation);
+    // console.log(currentLocation);
     let pagelocation = ["/addCampground", "/addComment"];
     // addComment doubt 
     if (pagelocation.indexOf(currentLocation) == -1) {
-        // location.reload(); // looping is happening don't know how
+        location.href = "/search";
     } else {
         location.href = "/signIn";
     }
 }
-
-
-
