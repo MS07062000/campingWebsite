@@ -50,6 +50,12 @@ export async function getAllCampground () {
   return await db.collection('campgrounds').find({ 'authenticated': 1 }).toArray();
 }
 
+export async function getAllCampgroundBySearchCriteria (userInput) {
+  // Perform a case-insensitive search using regular expression
+  const regex = new RegExp(userInput, 'i');
+  return await db.collection('campgrounds').find({ 'authenticated': 1, 'campgroundName': { $regex: regex } }).toArray();
+}
+
 export async function add () {
   await db.collection('campgrounds').insertOne();
 }
