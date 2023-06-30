@@ -68,7 +68,7 @@ function addCampground() {
             headers: { "Content-Type": "application/json" }
         }).then((result) => {
             document.querySelector("my-spinner").style.display = "none";
-            document.querySelector("my-modal").setAttribute("correct-message", "Thank you for submitting the information about the new camp. We appreciate your contribution to our community. Our team will review the details and add the camp to our directory within the next seven days. Thank you for your patience and for helping us make our platform more comprehensive.");
+            document.querySelector("my-modal").setAttribute("correct-message", "Thank you for submitting the information about the new camp. We appreciate your contribution to our community. Our team will review the details and add the camp to our directory within the next seven days.");
             document.querySelector("my-modal").style.display = "block";
             console.log(result);
             modalRedirectURL="/search";

@@ -34,4 +34,4 @@ function addComment(campName) {
     });
 }
 
-addComment(location.href.split("/addComment/")[1].split("?")[0]);
+addComment(decodeURIComponent(location.href.split("/addComment/")[1].split("?")[0]));
