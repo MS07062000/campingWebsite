@@ -223,5 +223,6 @@ a {
 
     .desktopLandingImage {
         display: inline-block;
+        vertical-align: middle;
     }
 }
