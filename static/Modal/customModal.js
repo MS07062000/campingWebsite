@@ -10,7 +10,7 @@ modalTemplate.innerHTML = `
     <p class="message">Test Modal</p>
     <button class="closeButton">Close</button>
 </div>
-<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js" type="text/javascript"></script>
 `;
 
 class Modal extends HTMLElement {
