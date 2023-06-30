@@ -12,17 +12,30 @@ document.querySelector('[name="signUpForm"]').addEventListener("submit", (e) => 
    let password = form.querySelector("[name='password']").value;
    let snackBar = document.querySelector("custom-snackbar");
    form.querySelector('button').disabled = true;
-
-   console.log(userName + " " + password);
-   fetch("http://127.0.0.1:3000/api/signUp", {
+   document.querySelector("my-spinner").style.display = "block";
+   console.log(userName + " " +" "+email+" "+password);
+   fetch('/api/signUp', {
       method: "POST",
       body: JSON.stringify({ "email":email, "userName": userName, "password": password }),
       headers: { "Content-Type": "application/json" }
    }).then((response) => {
-      console.log(response);
-      if(response.status==409){
-         console.log(response.body);
-         snackBar.setAttribute("message",response.body);
+      console.log(response); 
+      if(response.status!=200){
+         document.querySelector("my-spinner").style.display = "none";
+         if(response.statusText){
+            document.querySelector("my-modal").setAttribute("error-message",response.statusText);
+            document.querySelector("my-modal").style.display="block";
+            modalRedirectURL="/signUp";
+         }
+      }else{
+         document.querySelector("my-spinner").style.display = "none";
+         if(response.statusText){
+            console.log(response.statusText);
+            document.querySelector("my-modal").setAttribute("correct-message","Please checkout your Email for Verification.");
+            document.querySelector("my-modal").style.display="block";
+            modalRedirectURL="/signIn";
+         }
+         // location.href = "/search";// if status code 200
       }
    }).catch((err) => {
       console.log(err);

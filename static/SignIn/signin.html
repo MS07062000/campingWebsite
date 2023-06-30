@@ -24,13 +24,13 @@
             </div>
             <form name="signInForm">
                 <div>
-                    <label for="username" class="label">Username</label>
-                    <input for="username" name="username" placeholder="johndoe_91">
+                    <label for="email" class="label">E-mail</label>
+                    <input for="email" name="email" placeholder="xyz@gmail.com" required>
                 </div>
                 <div>
                     <label for="password" class="label">Password</label>
                     <input for="password" name="password" type="password" placeholder="Choose password" minlength="9"
-                        maxlength="64">
+                        maxlength="64" required>
                 </div>
 
                 <button type="submit" class="createAccountButton">Login</button>
@@ -53,10 +53,11 @@
         </div>
         <my-spinner></my-spinner>
         <my-modal></my-modal>
+        <custom-snackbar></custom-snackbar>
     </div>
 </body>
-<script src="/static/SignUp/heightwidth.js" type="text/javascript"></script>
 <script src="/static/SignIn/signin.js"></script>
 <script src="/static/Modal/customModal.js"></script>
 <script src="/static/Spinner/spinner.js"></script>
+<script src="'/static/SnackBar/snackbar.js"></script>
 </html>

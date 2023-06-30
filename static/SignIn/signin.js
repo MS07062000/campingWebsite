@@ -2,9 +2,9 @@ document.querySelector('[name="signInForm"]').addEventListener("submit", (e) => 
    console.log("signIn");
    e.preventDefault();
    let form = document.querySelector('[name="signInForm"]');
-   let userName = form.querySelector("[name='username']").value;
+   let email = form.querySelector("[name='email']").value;
    let password = form.querySelector("[name='password']").value;
-
+   let snackBar = document.querySelector("custom-snackbar");
    // if (validateEmail(email)) {
 
    // } else {
@@ -13,17 +13,17 @@ document.querySelector('[name="signInForm"]').addEventListener("submit", (e) => 
    // }
    
    form.querySelector('button').disabled = true;
-   console.log(userName + " " + password);
+   console.log(email + " " + password);
    document.querySelector("my-spinner").style.display = "block";
-   fetch("http://127.0.0.1:3000/api/signIn", {
+   fetch("/api/signIn", {
       method: "POST",
-      body: JSON.stringify({ "userName": userName, "password": password }),
+      body: JSON.stringify({ "email": email, "password": password }),
       headers: { "Content-Type": "application/json" }
-   }).then((result) => {
+   }).then((response) => {
       document.querySelector("my-spinner").style.display = "none";
-      console.log(result);
-      if(result.status!=200){
-         throw new Error(result.statusText);
+      console.log(response);
+      if(response.status!=200){
+         snackBar.setAttribute("message",response.statusText);
       }else{
          location.href = "/search";// if status code 200
       }
