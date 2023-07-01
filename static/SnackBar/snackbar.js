@@ -20,7 +20,10 @@ class SnackBar extends HTMLElement {
             let snackBar = this.querySelector(".snackbar");
             snackBar.textContent = this.getAttribute("message");
             snackBar.classList.add("show");
-            setTimeout(() => { snackBar.classList.remove("show"); }, 3000);
+            snackBar.addEventListener('animationend',()=>{
+                snackBar.classList.remove("show");snackBar.removeAttribute("message");
+            });
+            
         }
 
     }
