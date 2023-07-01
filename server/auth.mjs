@@ -36,12 +36,12 @@ export async function tokenGeneration (payload, sessionId) {
 
 export async function emailVerificationTokenGeneration (payload) {
   const jwtSignFunction = promisify(jwt.sign);
-  return jwtSignFunction(payload, { expiresIn: Date.now() + (24 * 60 * 60) });
+  return jwtSignFunction(payload, process.env.EMAIL_VERIFICATION_SECRET, { expiresIn: Date.now() + (24 * 60 * 60) });
 }
 
 export async function verifyTokenFromEmail (token) {
   return new Promise((resolve, reject) => {
-    jwt.verify(token, (err, decoded) => {
+    jwt.verify(token, process.env.EMAIL_VERIFICATION_SECRET, (err, decoded) => {
       if (err) {
         reject(err);
       }

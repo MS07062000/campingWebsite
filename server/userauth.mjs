@@ -4,16 +4,11 @@
 
 import { connectToDatabase, db } from '../server/mongodb.mjs';
 import { checkPassword, emailVerificationTokenGeneration, setPassword, tokenGeneration, validatingToken, verifyTokenFromEmail } from './auth.mjs';
+import { sendLinkForEmailVerification } from '../server/mailsender.mjs';
 
 export async function connect () {
   await connectToDatabase();
 }
-
-// async function getUserNameIfExists (userName) {
-//   const result = await db.collection('userCredentials').findOne({ userName });
-//   console.log('Result' + JSON.stringify(result));
-//   return result;
-// }
 
 async function getUserMailIDIfExists (email) {
   const result = await db.collection('userCredentials').findOne({ email });
@@ -25,10 +20,10 @@ export async function signUp (userInfo, response) {
   try {
     const user = await getUserMailIDIfExists(userInfo.email);
     if (user === null) {
-      await insertNewUser(userInfo);
+      await insertNewUser(userInfo, response);
       const checkEmailVerified = setInterval(async () => {
         try {
-          const verificationStatus = (await db.collection('userCredentials').findOne(userInfo.email)).verified;
+          const verificationStatus = (await db.collection('userCredentials').findOne({ 'email': userInfo.email })).verified;
           if (verificationStatus) {
             signIn(userInfo, response);
             clearInterval(checkEmailVerified);
@@ -47,7 +42,7 @@ export async function signUp (userInfo, response) {
   }
 }
 
-async function insertNewUser (userInfo) {
+async function insertNewUser (userInfo, response) {
   const password = await setPassword(userInfo.password);
   // console.log(password);
 
@@ -58,43 +53,27 @@ async function insertNewUser (userInfo) {
     userName: userInfo.userName
   };
 
+  const emailVerificationToken = await emailVerificationTokenGeneration(payloadForEmailVerification);
   const doc = {
     '_id': userId,
     'email': userInfo.email,
     'userName': userInfo.userName,
     'password': password,
     'verified': false,
-    'token': emailVerificationTokenGeneration(payloadForEmailVerification),
+    'token': emailVerificationToken,
     'creationTime': new Date().getTime()
   };
 
-  // inserting new user
-  await db.collection('userCredentials').insertOne(doc);
+  const responseOfEmailVerificationSend = await sendLinkForEmailVerification(userInfo.email, userInfo.userName, emailVerificationToken);
+  console.log('UserAuth : ' + responseOfEmailVerificationSend);
+  if (responseOfEmailVerificationSend.Response) {
+    // inserting new user
+    await db.collection('userCredentials').insertOne(doc);
+    response.status(200).send(responseOfEmailVerificationSend.Response.toString());
+  } else {
+    response.status(400).send(responseOfEmailVerificationSend.Error);
+  }
 }
-
-// export async function signUp (userInfo, response) {
-//   if (await getUserNameIfExists(userInfo.userName) === null) { // checkinguserExistsORNot
-//     const password = await setPassword(userInfo.password);
-//     // console.log(password);
-
-//     const userId = (await db.collection('user').insertOne({})).insertedId;
-//     console.log(JSON.stringify(userId));
-
-//     const doc = { 'userName': userInfo.userName, 'password': password, 'userId': userId };
-
-//     // inserting new user
-//     await db.collection('userCredentials').insertOne(doc);
-//     return signIn(userInfo, response);
-//   } else {
-//     console.log('Error in checking username');
-//   }
-// }
-
-// async function getUserDetailsIfUserNameExists (userName) {
-//   const result = await db.collection('userCredentials').findOne({ 'userName': userName });
-//   console.log('Result' + JSON.stringify(result));
-//   return result;
-// }
 
 async function getUserDetailsIfEmailExists (email) {
   const result = await db.collection('userCredentials').findOne({ email });
@@ -112,6 +91,7 @@ export async function signIn (userInfo, response) {
       // redirect to home page
       if (verificationStatus) {
         console.log('Successfully SignIn');
+        userInfo.userName = (await fetchedUserInfo).userName;
         return storeSessionToken(userInfo, response);
       } else {
         // show modal indication unverified email
@@ -127,7 +107,9 @@ export async function signIn (userInfo, response) {
 }
 
 export async function verifyLinkSendInGmailOfUser (userName, token) {
-  const result = await db.collection('userCredentials').findOne({ userName, token });
+  const result = await db.collection('userCredentials').findOne({ 'userName': userName, 'token': token });
+  console.log('verify');
+  console.log(result);
   let tokenValid = false;
   await verifyTokenFromEmail(token).then((response, error) => {
     if (response) {
@@ -147,7 +129,7 @@ export async function verifyLinkSendInGmailOfUser (userName, token) {
 }
 
 async function storeSessionToken (userInfo, response) {
-  const result = (await db.collection('userCredentials').find({ userName: userInfo.userName }).toArray())[0];
+  const result = (await db.collection('userCredentials').find({ email: userInfo.email }).toArray())[0];
   console.log(result);
 
   const sessionId = (await db.collection('session').insertOne({ userId: result.userId })).insertedId;
@@ -180,4 +162,9 @@ export async function validateSession (token) {
   const userSessionInfo = (await db.collection('session').find({ token }).toArray())[0];
   console.log(JSON.stringify(userSessionInfo));
   return await validatingToken(token, userSessionInfo._id.toString());
+}
+
+export async function isUserVerified (userName, token) {
+  const result = await db.collection('userCredentials').findOne({ 'userName': userName, 'token': token });
+  return await result.verified;
 }

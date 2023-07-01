@@ -12,7 +12,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import { addCampground, addComment, createCollection, getAllCampground, getAllCampgroundBySearchCriteria, getCampgroundInfo, getCommentForCampground } from './campgroundUtils.mjs';
-import { connect, signUp, signIn, validateSession, logOut, verifyLinkSendInGmailOfUser } from './userauth.mjs';
+import { connect, signUp, signIn, validateSession, logOut, verifyLinkSendInGmailOfUser, isUserVerified } from './userauth.mjs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -77,9 +77,15 @@ app.post('/api/signUp', async (req, res) => {
 app.get('/api/verify/:userName/:verificationToken', async (req, res) => {
   console.log('Username: ' + req.params.userName);
   console.log('Token: ' + req.params.verificationToken);
-  await verifyLinkSendInGmailOfUser(req.params.userName, req.params.verificationToken).then((response) => {
+  isUserVerified(req.params.userName, req.params.verificationToken).then((response) => {
     if (response) {
-      res.redirect(`/mailVerificationResponse/${response}`);
+      res.redirect('/signIn');
+    } else {
+      verifyLinkSendInGmailOfUser(req.params.userName, req.params.verificationToken).then((response) => {
+        if (response) {
+          res.redirect(`/mailVerificationResponse/${response}`);
+        }
+      });
     }
   });
 });
