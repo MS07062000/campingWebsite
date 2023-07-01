@@ -5,15 +5,13 @@ document.querySelector('[name="signInForm"]').addEventListener("submit", (e) => 
    let email = form.querySelector("[name='email']").value;
    let password = form.querySelector("[name='password']").value;
    let snackBar = document.querySelector("custom-snackbar");
-   // if (validateEmail(email)) {
-
-   // } else {
-   //    let snackbar = document.createElement("my-snackbar");
-   //    snackbar.setAttribute("message", "email");
-   // }
+   if (!validateEmail(email)){
+      snackBar.setAttribute("message", "Invalid email");
+      return;
+   }
    
    form.querySelector('button').disabled = true;
-   console.log(email + " " + password);
+   // console.log(email + " " + password);
    document.querySelector("my-spinner").style.display = "block";
    fetch("/api/signIn", {
       method: "POST",
@@ -38,7 +36,7 @@ document.querySelector('[name="signInForm"]').addEventListener("submit", (e) => 
 
 
 function validateEmail(email) {
-   if (email.contains("@")) {
+   if (email.includes("@")) {
       return true;
    } else {
       return false;

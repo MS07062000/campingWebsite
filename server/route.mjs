@@ -11,9 +11,13 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-import { addCampground, addComment, createCollection, getAllCampground, getCampgroundInfo, getCommentForCampground } from './campgroundUtils.mjs';
+import { addCampground, addComment, createCollection, getAllCampground, getAllCampgroundBySearchCriteria, getCampgroundInfo, getCommentForCampground } from './campgroundUtils.mjs';
 import { connect, signUp, signIn, validateSession, logOut, verifyLinkSendInGmailOfUser } from './userauth.mjs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const app = express();
 const port = 3000;
 
@@ -25,13 +29,14 @@ await createCollection();
 
 // --------------------------------------------------------------------------------------------------
 // unauthenticated routes
-app.use('/static', express.static('static'));
-app.use('/Assets', express.static('Assets'));
-app.use('/', express.static('./static/LandingPage/landing.html'));
-app.use('/signIn', express.static('./static/SignIn/signin.html'));
-app.use('/signUp', express.static('./static/SignUp/signup.html'));
-app.use('/search', express.static('./static/SearchPage/search.html'));
-app.use('/confirmation', express.static('./static/MailVerificationResponse/mailVerificationResponse.html'));
+// console.log(path.join(__dirname, '../static/LandingPage/landing.html'));
+app.use('/static', express.static(path.join(__dirname, '../static')));
+app.use('/Assets', express.static(path.join(__dirname, '../Assets')));
+app.use('/landing', express.static(path.join(__dirname, '../static/LandingPage/landing.html')));
+app.use('/signIn', express.static(path.join(__dirname, '../static/SignIn/signin.html')));
+app.use('/signUp', express.static(path.join(__dirname, '../static/SignUp/signup.html')));
+app.use('/search', express.static(path.join(__dirname, '../static/SearchPage/search.html')));
+app.use('/mailVerificationResponse/:verifiedStatus', express.static(path.join(__dirname, '../static/MailVerificationResponse/mailVerificationResponse.html')));
 
 // authenticated routes
 const authenticate = async (req, res, next) => {
@@ -49,11 +54,14 @@ const authenticate = async (req, res, next) => {
   }
 };
 
-app.use('/campground/:campName', authenticate, express.static('./static/IndividualCampgroundPage/individualcampground.html'));
-app.use('/addCampground', authenticate, express.static('./static/AddNewCampground/addNewCampground.html'));
-app.use('/addComment/:campName', authenticate, express.static('./static/AddNewComment/addNewComment.html'));
+app.use('/campground/:campName', authenticate, express.static(path.join(__dirname, '../static/IndividualCampgroundPage/individualcampground.html')));
+app.use('/addCampground', authenticate, express.static(path.join(__dirname, '../static/AddNewCampground/addNewCampground.html')));
+app.use('/addComment/:campName', authenticate, express.static(path.join(__dirname, '../static/AddNewComment/addNewComment.html')));
 
 // --------------------------------------------------------------------------------------------------
+app.get('/', (req, res) => {
+  res.redirect('/landing');
+});
 
 app.post('/api/signIn', async (req, res) => {
   console.log('Body:' + JSON.stringify(req.body));
@@ -61,17 +69,17 @@ app.post('/api/signIn', async (req, res) => {
   await signIn(req.body, res);
 });
 
-app.post('/api/signUp', async (req, res, next) => {
+app.post('/api/signUp', async (req, res) => {
   console.log('Body:' + JSON.stringify(req.body));
   await signUp(req.body, res);
 });
 
-app.get('/api/verify/:userName/:verificationToken', async (req, res, next) => {
+app.get('/api/verify/:userName/:verificationToken', async (req, res) => {
   console.log('Username: ' + req.params.userName);
   console.log('Token: ' + req.params.verificationToken);
   await verifyLinkSendInGmailOfUser(req.params.userName, req.params.verificationToken).then((response) => {
     if (response) {
-      res.redirect(`/confirmation/:${response}`);// checkout
+      res.redirect(`/mailVerificationResponse/${response}`);
     }
   });
 });
@@ -107,9 +115,9 @@ app.get('/api/allCampgrounds', async (req, res) => {
   res.send(campgrounds).status(200);
 });
 
-app.put('/api/HomePage', (req, res) => {
-  const campgroundInfo = getAllCampground();
-  res.send(campgroundInfo);
+app.get('/api/search/:userInput', async (req, res) => {
+  const campgrounds = await getAllCampgroundBySearchCriteria(req.params.userInput);
+  res.send(campgrounds).status(200);
 });
 
 app.get('/api/campInfo/:campgroundName', async (req, res) => {
@@ -121,5 +129,5 @@ app.get('/api/campInfo/:campgroundName', async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log('server started' + Date.now());
+  console.log('server started' + port);
 });

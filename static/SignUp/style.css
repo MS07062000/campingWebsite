@@ -17,7 +17,7 @@ a{
         overflow: hidden;
         margin: 0%;
         width:100vw;
-        width: calc(var(--vw, 1vw) * 100);
+        flex-wrap: nowrap;
         display: flex;
         justify-content: space-between;
         align-items: stretch;
@@ -132,11 +132,12 @@ a{
 
 @media only screen and (min-device-width:768px){
     .container {
-        overflow: hidden;
+        /* overflow: hidden; */
+        height: fit-content;
         margin: 0%;
         width:100vw;
-        width: calc(var(--vw, 1vw) * 100);
         display: flex;
+        flex-wrap: nowrap;
         justify-content: space-between;
         align-items: stretch;
         flex-direction: column;
@@ -250,13 +251,10 @@ a{
 
 @media only screen and (min-device-width:1024px){
     .container {
-        overflow: hidden;
+        overflow: auto;
         margin: 0%;
-        height: 100vh;
-        height: calc(var(--vh, 1vh) * 100);
-        width:100vw;
-        width: calc(var(--vw, 1vw) * 100);
         display: flex;
+        flex-wrap: nowrap;
         justify-content: space-between;
         align-items: stretch;
         flex-direction: row;
@@ -305,7 +303,7 @@ a{
         padding: 2.5% 2%;
         margin: 2% 0%;
         color:black;
-        background-color: yellow;
+        background-color: #F5F5F5;
     }
     
     .createAccountButton {
