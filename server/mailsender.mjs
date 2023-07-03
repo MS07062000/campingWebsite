@@ -64,7 +64,7 @@ async function sendMailToUser (mailDetails) {
 export async function sendLinkForEmailVerification (mailReciever, userName, validatingToken) {
   let linkForVerification;
   if (process.env.NODE_ENV === 'production') {
-    linkForVerification = `https://yelpcamp-9gsq.onrender.com/api/verify/${userName}/${validatingToken}`;
+    linkForVerification = `/api/verify/${userName}/${validatingToken}`;
   } else {
     linkForVerification = `http://127.0.0.1:3000/api/verify/${userName}/${validatingToken}`;
   }
