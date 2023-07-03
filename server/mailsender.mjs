@@ -62,13 +62,7 @@ async function sendMailToUser (mailDetails) {
 }
 
 export async function sendLinkForEmailVerification (mailReciever, userName, validatingToken) {
-  let linkForVerification;
-  if (process.env.NODE_ENV === 'production') {
-    linkForVerification = `/api/verify/${userName}/${validatingToken}`;
-  } else {
-    linkForVerification = `http://127.0.0.1:3000/api/verify/${userName}/${validatingToken}`;
-  }
-
+  const linkForVerification = `/api/verify/${userName}/${validatingToken}`;
   const mailBody = composeEmail(userName, linkForVerification);
   const mailSubject = 'Confirm Your Account';
   const mailInformation = mailDetails(mailReciever, mailSubject, mailBody);
