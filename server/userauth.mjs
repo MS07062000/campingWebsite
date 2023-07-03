@@ -132,7 +132,7 @@ async function storeSessionToken (userInfo, response) {
   const result = (await db.collection('userCredentials').find({ email: userInfo.email }).toArray())[0];
   // console.log(result);
 
-  const sessionId = (await db.collection('session').insertOne({ userId: result.userId })).insertedId;
+  const sessionId = (await db.collection('session').insertOne({ userId: result._id })).insertedId;
   // console.log(sessionId);
 
   const token = await tokenGeneration({}, sessionId.toString());
