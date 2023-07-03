@@ -62,7 +62,7 @@ function addCampground() {
         };
 
 
-        fetch("http://127.0.0.1:3000/api/addCampground", {
+        fetch("/api/addCampground", {
             method: "POST",
             body: JSON.stringify(campgroundInfo),
             headers: { "Content-Type": "application/json" }
