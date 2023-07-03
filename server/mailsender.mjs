@@ -41,43 +41,24 @@ async function sendMailToUser (mailDetails) {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
   try {
     const response = await sgMail.send(mailDetails);
-    console.log('Response : ' + response[0]);
+    // console.log('Response : ' + response[0]);
     if (response[0].statusCode) {
-      console.log(response[0].statusCode);
+      // console.log(response[0].statusCode);
       return { Response: response[0].statusCode };
     } else {
-      console.log(response[0]);
+      // console.log(response[0]);
       return { Response: response[0] };
     }
   } catch (error) {
-    console.log('Error: ' + error);
+    // console.log('Error: ' + error);
 
     if (error.response) {
-      console.error(error.response.body);
+      // console.error(error.response.body);
       return { Error: error.response.body };
     } else {
       return { Error: error };
     }
   }
-  // sgMail.send(mailDetails).then((response) => {
-  //   console.log('Response : ' + response[0]);
-  //   if (response[0].statusCode) {
-  //     console.log(response[0].statusCode);
-  //     return { Response: response[0].statusCode };
-  //   } else {
-  //     console.log(response[0]);
-  //     return { Response: response[0] };
-  //   }
-  // }).catch((error) => {
-  //   console.log('Error: ' + error);
-
-  //   if (error.response) {
-  //     console.error(error.response.body);
-  //     return { Error: error.response.body };
-  //   } else {
-  //     return { Error: error };
-  //   }
-  // });
 }
 
 export async function sendLinkForEmailVerification (mailReciever, userName, validatingToken) {
@@ -92,7 +73,6 @@ export async function sendLinkForEmailVerification (mailReciever, userName, vali
   const mailSubject = 'Confirm Your Account';
   const mailInformation = mailDetails(mailReciever, mailSubject, mailBody);
   const response = await sendMailToUser(mailInformation);
-  console.log('sendMailToUser' + response);
   return response;
 }
 

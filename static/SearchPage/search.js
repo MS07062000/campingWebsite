@@ -23,7 +23,7 @@ async function search() {
     var timerId;
     var searchText = document.body.querySelector('input[class=search]');
     searchText.addEventListener("input", (event) => {
-        console.log(searchText.value);
+        // console.log(searchText.value);
         clearTimeout(timerId);
         // timerId  =  setTimeout(async ()=>{
         //     if(searchText.value.trim().length!=0){

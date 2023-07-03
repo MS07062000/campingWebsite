@@ -15,8 +15,8 @@ export async function checkPassword (password, hash) {
 }
 
 export async function validatingToken (token, sessionId) {
-  console.log('Token :' + token);
-  console.log('Session Id: ' + sessionId);
+  // console.log('Token :' + token);
+  // console.log('Session Id: ' + sessionId);
   return new Promise((resolve, reject) => {
     jwt.verify(token, sessionId, (err, decoded) => {
       if (err) {

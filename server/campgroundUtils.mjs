@@ -6,7 +6,7 @@ import { db } from './mongodb.mjs';
 export async function createCollection () {
   let collectionList = await db.listCollections().toArray();
   collectionList = collectionList.map(collection => collection.name);
-  console.log(collectionList);
+  // console.log(collectionList);
   if (collectionList.indexOf('userCredentials') === -1) {
     await db.createCollection('userCredentials');
   }

@@ -25,7 +25,7 @@ document.querySelector('[name="signUpForm"]').addEventListener("submit", (e) => 
       body: JSON.stringify({ "email": email, "userName": userName, "password": password }),
       headers: { "Content-Type": "application/json" }
    }).then((response) => {
-      console.log(response.status);
+      // console.log(response.status);
       if (response.status != 200) {
          document.querySelector("my-spinner").style.display = "none";
          if (response.statusText) {
@@ -44,7 +44,7 @@ document.querySelector('[name="signUpForm"]').addEventListener("submit", (e) => 
          // location.href = "/search";// if status code 200
       }
    }).catch((err) => {
-      console.log(err);
+      // console.log(err);
    });
 
 
@@ -56,5 +56,4 @@ function validateEmail(email) {
    } else {
       return false;
    }
-
 }

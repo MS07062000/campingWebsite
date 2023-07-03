@@ -7,7 +7,7 @@ function imageToBase64() {
             const reader = new FileReader();
             reader.onloadend = () => {
                 const base64Data = reader.result.split(',')[1];
-                console.log(base64Data);
+                // console.log(base64Data);
                 document.body.querySelector('img').setAttribute('src', 'data:image/svg+xml;base64,' + base64Data);
                 document.body.querySelector('img').style.height="3.4vh";
             };

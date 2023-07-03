@@ -24,7 +24,7 @@ class Modal extends HTMLElement {
     }
 
     attributeChangedCallback(){
-        console.log(this);
+        // console.log(this);
         if(this.hasAttribute("correct-message")){
             document.body.style.overflow="hidden";
             this.querySelector(".errorSign").style.display="none";

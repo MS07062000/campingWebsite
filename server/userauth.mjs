@@ -12,7 +12,7 @@ export async function connect () {
 
 async function getUserMailIDIfExists (email) {
   const result = await db.collection('userCredentials').findOne({ email });
-  console.log('Result' + JSON.stringify(result));
+  // console.log('Result' + JSON.stringify(result));
   return result;
 }
 
@@ -47,7 +47,7 @@ async function insertNewUser (userInfo, response) {
   // console.log(password);
 
   const userId = (await db.collection('user').insertOne({})).insertedId;
-  console.log(JSON.stringify(userId));
+  // console.log(JSON.stringify(userId));
   const payloadForEmailVerification = {
     email: userInfo.email,
     userName: userInfo.userName
@@ -65,7 +65,7 @@ async function insertNewUser (userInfo, response) {
   };
 
   const responseOfEmailVerificationSend = await sendLinkForEmailVerification(userInfo.email, userInfo.userName, emailVerificationToken);
-  console.log('UserAuth : ' + responseOfEmailVerificationSend);
+  // console.log('UserAuth : ' + responseOfEmailVerificationSend);
   if (responseOfEmailVerificationSend.Response) {
     // inserting new user
     await db.collection('userCredentials').insertOne(doc);
@@ -77,7 +77,7 @@ async function insertNewUser (userInfo, response) {
 
 async function getUserDetailsIfEmailExists (email) {
   const result = await db.collection('userCredentials').findOne({ email });
-  console.log('Result' + JSON.stringify(result));
+  // console.log('Result' + JSON.stringify(result));
   return result;
 }
 
@@ -90,7 +90,7 @@ export async function signIn (userInfo, response) {
     if (result) {
       // redirect to home page
       if (verificationStatus) {
-        console.log('Successfully SignIn');
+        // console.log('Successfully SignIn');
         userInfo.userName = (await fetchedUserInfo).userName;
         return storeSessionToken(userInfo, response);
       } else {
@@ -98,7 +98,7 @@ export async function signIn (userInfo, response) {
         response.status(401).send('Unverified Email. Please check your Email and verify as soon as possible to avoid losing all your signup efforts.');
       }
     } else {
-      console.log('Invalid Email and Password');
+      // console.log('Invalid Email and Password');
       response.status(400).send('Invalid Email or Password');
     }
   } else {
@@ -108,8 +108,8 @@ export async function signIn (userInfo, response) {
 
 export async function verifyLinkSendInGmailOfUser (userName, token) {
   const result = await db.collection('userCredentials').findOne({ 'userName': userName, 'token': token });
-  console.log('verify');
-  console.log(result);
+  // console.log('verify');
+  // console.log(result);
   let tokenValid = false;
   await verifyTokenFromEmail(token).then((response, error) => {
     if (response) {
@@ -130,14 +130,14 @@ export async function verifyLinkSendInGmailOfUser (userName, token) {
 
 async function storeSessionToken (userInfo, response) {
   const result = (await db.collection('userCredentials').find({ email: userInfo.email }).toArray())[0];
-  console.log(result);
+  // console.log(result);
 
   const sessionId = (await db.collection('session').insertOne({ userId: result.userId })).insertedId;
-  console.log(sessionId);
+  // console.log(sessionId);
 
   const token = await tokenGeneration({}, sessionId.toString());
   await db.collection('session').updateOne({ _id: sessionId }, { $set: { token } });
-  console.log(JSON.stringify(token));
+  // console.log(JSON.stringify(token));
 
   response.cookie('userName', userInfo.userName, {
     httpOnly: true,
@@ -148,7 +148,7 @@ async function storeSessionToken (userInfo, response) {
     httpOnly: true,
     signed: true
   }).sendStatus(200);
-  console.log('Successfully added token in session');
+  // console.log('Successfully added token in session');
 }
 
 export async function logOut (request, response) {
@@ -160,7 +160,7 @@ export async function logOut (request, response) {
 
 export async function validateSession (token) {
   const userSessionInfo = (await db.collection('session').find({ token }).toArray())[0];
-  console.log(JSON.stringify(userSessionInfo));
+  // console.log(JSON.stringify(userSessionInfo));
   return await validatingToken(token, userSessionInfo._id.toString());
 }
 

@@ -15,7 +15,7 @@ class SnackBar extends HTMLElement {
     }
 
     attributeChangedCallback() {
-        console.log(this);
+        // console.log(this);
         if (this.hasAttribute("message")) {
             let snackBar = this.querySelector(".snackbar");
             snackBar.textContent = this.getAttribute("message");

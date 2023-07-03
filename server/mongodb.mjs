@@ -14,9 +14,9 @@ export let db;
 export async function connectToDatabase () {
   try {
     await client.connect();
-    console.log('Connected');
+    // console.log('Connected');
     await client.db('admin').command({ ping: 1 });
-    console.log('Connected successfully to server');
+    // console.log('Connected successfully to server');
     db = client.db('test');
   } finally {
     // await client.close();

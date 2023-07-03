@@ -1,7 +1,7 @@
 async function getCampInfo(campName){
     document.title=campName;
     let campData=await(await fetch(`/api/campInfo/${campName}`)).json();
-    console.log(campData);
+    // console.log(campData);
     //campInfo=await campInfo.json();
 
     let campDetails=campData["campDetails"];
@@ -29,10 +29,10 @@ async function getCampInfo(campName){
         let timeOfComment=document.createElement("span");
         timeOfComment.setAttribute("class","time");
         timeOfComment.textContent=commentTime(commentByUserInfo["time"])+"ago";
-        console.log(timeOfComment);
+        // console.log(timeOfComment);
 
         userName.insertAdjacentElement("beforeend",timeOfComment);
-        console.log(userName);
+        // console.log(userName);
 
         let commentByUser=document.createElement("p");
         commentByUser.setAttribute("class","userCommentForCampground");
@@ -40,7 +40,7 @@ async function getCampInfo(campName){
 
         commentContainer.appendChild(userName);
         commentContainer.appendChild(commentByUser);
-        console.log(commentContainer);
+        // console.log(commentContainer);
         
         document.body.querySelector(".commentZone").appendChild(commentContainer);
 
@@ -66,13 +66,13 @@ function commentTime(time){
     const diffInMinutes = diff / (1000 * 60);
     // console.log(diffInMinutes);
     if(diffInDays>1){
-        console.log(Math.floor(diffInDays));
+        // console.log(Math.floor(diffInDays));
         return Math.floor(diffInDays)+" days ";
     }else if(diffInHours>1){
-        console.log(Math.floor(diffInHours));
+        // console.log(Math.floor(diffInHours));
         return Math.floor(diffInHours)+" hrs ";
     }else{
-        console.log(Math.floor(diffInMinutes));
+        // console.log(Math.floor(diffInMinutes));
         return Math.floor(diffInMinutes)+" minutes ";
     }
 }

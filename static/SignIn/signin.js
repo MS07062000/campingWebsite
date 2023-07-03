@@ -1,5 +1,5 @@
 document.querySelector('[name="signInForm"]').addEventListener("submit", (e) => {
-   console.log("signIn");
+   // console.log("signIn");
    e.preventDefault();
    let form = document.querySelector('[name="signInForm"]');
    let email = form.querySelector("[name='email']").value;
@@ -19,7 +19,7 @@ document.querySelector('[name="signInForm"]').addEventListener("submit", (e) => 
       headers: { "Content-Type": "application/json" }
    }).then((response) => {
       document.querySelector("my-spinner").style.display = "none";
-      console.log(response);
+      // console.log(response);
       if(response.status!=200){
          snackBar.setAttribute("message",response.statusText);
       }else{
@@ -30,7 +30,7 @@ document.querySelector('[name="signInForm"]').addEventListener("submit", (e) => 
       document.querySelector("my-modal").setAttribute("error-message", err);
       modalRedirectURL = "/signIn";
       document.querySelector("my-modal").style.display = "block";
-      console.log(err);
+      // console.log(err);
    });
 });
 
@@ -41,5 +41,4 @@ function validateEmail(email) {
    } else {
       return false;
    }
-
 }
