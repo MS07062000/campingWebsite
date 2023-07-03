@@ -140,12 +140,12 @@ async function storeSessionToken (userInfo, response) {
   console.log(JSON.stringify(token));
 
   response.cookie('userName', userInfo.userName, {
-    httpOnly: false,
+    httpOnly: true,
     signed: true
   });
 
   response.cookie('access-token', token, {
-    httpOnly: false,
+    httpOnly: true,
     signed: true
   }).sendStatus(200);
   console.log('Successfully added token in session');
