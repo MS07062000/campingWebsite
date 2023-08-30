@@ -1,3 +1,4 @@
 # Ignore all files in a directory
 server/node_modules
 static/node_modules
+server/.env
